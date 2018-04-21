@@ -30,6 +30,7 @@ class RadialBracketPage extends React.Component {
       { name: "MIN", full: 'Minnesota Timberwolves', color: 0, logo: 0, place: 8, conference: 'West' },
       { name: "HOU", full: 'Houston Rockets', color: 0, logo: 0, place: 1, conference: 'West' },
     ],
+    bracket: [],
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[6], east[1], east[7]];
@@ -37,8 +38,8 @@ class RadialBracketPage extends React.Component {
   }
   componentDidMount() {
     const bracket = [];
-    for (let i = 0; i < 16; i++) {
-      bracket.push({team: {}, wins: 0 });
+    for (let i = 0; i < this.state.teams.length; i++) {
+      bracket.push({team: { name: '' }, wins: 0 });
     };
     const west = [];
     const east = [];
@@ -59,7 +60,7 @@ class RadialBracketPage extends React.Component {
       <div>
         <Header />
         <RadialBracketTabs />
-        <RadialBracket />
+        <RadialBracket data={this.state} />
         <RadialBracketInput />
         <RadialBracketModal />
       </div>
