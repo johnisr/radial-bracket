@@ -4,6 +4,7 @@ import RadialBracketTabs from './RadialBracketTabs/RadialBracketTabs';
 import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
+import './RadialBracketPage.css';
 
 class RadialBracketPage extends React.Component {
   state = {
@@ -31,6 +32,14 @@ class RadialBracketPage extends React.Component {
       { name: "HOU", full: 'Houston Rockets', color: 0, logo: 0, place: 1, conference: 'West' },
     ],
     bracket: [],
+    modal: {
+      x: 0,
+      y: 0,
+      name: '',
+      index: 0,
+      otherIndex: 0,
+      width: 0,
+    },
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
@@ -55,21 +64,80 @@ class RadialBracketPage extends React.Component {
 
     this.setState(() => ({ bracket }));
   }
-  onClick = (e, d, level) => {
+  onSvgClick = (e, d, level) => {
     const index = Math.pow(2, level) + d.index;
+    if (index < 2) {
+      console.log('can not select for winner');
+      return;
+    }
+
     const bracket = this.state.bracket;
-    bracket[index].wins = 4;
-    bracket[Math.floor(index / 2)] = { team: bracket[index].team, wins: 0 };
-    this.setState(() => ({ bracket }));
+    if (bracket[index].team.name === '') {
+      console.log('current team not set');
+      return;
+    }
+    const currentIndex = index;
+    let otherIndex;
+    if (index % 2 === 0) {
+      if (bracket[index + 1].team.name === '') {
+        console.log('other team not set');
+        return;
+      }
+      otherIndex = index + 1;
+    } else {
+      if (bracket[index - 1].team.name === '') {
+        console.log('other team not set');
+        return;
+      }
+      otherIndex = index - 1;
+    }
+    const x = e.clientX;
+    const y =  e.clientY;
+
+    this.setState(() => ({
+      modal: {
+        x,
+        y,
+        name: d.data.team.name,
+        index,
+        otherIndex,
+        width: this.state.dimensions[0],
+      },
+    }));
+
+    // bracket[index].wins = 4;
+    // bracket[Math.floor(index / 2)] = { team: bracket[index].team, wins: 0 };
+    // this.setState(() => ({ bracket }));
+  }
+  onModalClose = (e, index, otherIndex) => {
+
+    const bracket = this.state.bracket;
+    if (e !== undefined && index !== undefined && otherIndex !== undefined) {
+      const value = e.target.value;
+      bracket[index].wins = 4;
+      bracket[otherIndex].wins = value - 4;
+      bracket[Math.floor(index / 2)].team = bracket[index].team;
+    }
+    this.setState(() => ({
+      modal: {
+        x: 0,
+        y: 0,
+        name: '',
+        index: 0,
+        otherIndex: 0,
+        width: 0,
+      },
+      bracket,
+    }));
   }
   render() {
     return(
-      <div>
+      <div className='RadialBracketPage'>
         <Header />
         <RadialBracketTabs />
-        <RadialBracket data={this.state} onClick={this.onClick} />
+        <RadialBracket data={this.state} onClick={this.onSvgClick} />
         <RadialBracketInput />
-        <RadialBracketModal />
+        <RadialBracketModal data={this.state.modal} onModalClose={this.onModalClose}/>
       </div>
     );
   };
