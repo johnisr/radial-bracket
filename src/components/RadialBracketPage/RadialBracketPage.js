@@ -33,8 +33,8 @@ class RadialBracketPage extends React.Component {
     bracket: [],
   };
   defaultOrder(west, east) {
-    const order = [east[0], east[7], east[3], east[4], east[2], east[6], east[1], east[7]];
-    return order.concat([west[0], west[7], west[3], west[4], west[2], west[6], west[1], west[7]]);
+    const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
+    return order.concat([west[0], west[7], west[3], west[4], west[2], west[5], west[1], west[6]]);
   }
   componentDidMount() {
     const bracket = [];
@@ -55,12 +55,19 @@ class RadialBracketPage extends React.Component {
 
     this.setState(() => ({ bracket }));
   }
+  onClick = (e, d, level) => {
+    const index = Math.pow(2, level) + d.index;
+    const bracket = this.state.bracket;
+    bracket[index].wins = 4;
+    bracket[Math.floor(index / 2)] = { team: bracket[index].team, wins: 0 };
+    this.setState(() => ({ bracket }));
+  }
   render() {
     return(
       <div>
         <Header />
         <RadialBracketTabs />
-        <RadialBracket data={this.state} />
+        <RadialBracket data={this.state} onClick={this.onClick} />
         <RadialBracketInput />
         <RadialBracketModal />
       </div>

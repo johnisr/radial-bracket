@@ -54,7 +54,7 @@ const RadialBracketPie = (props) => {
 
   // Text Functions
   const getTextTransform = (d, i, round) => {
-    const level = Math.log2(round);
+    const level = Math.log2(round.length);
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (angle > 90 && angle < 270) angle = angle + 180;
     return level !== 0 ? `translate(${path.centroid(d)}) rotate(${angle})` : null;
@@ -128,7 +128,7 @@ const RadialBracketPie = (props) => {
     return (
       <g
         key={`group__${level}--${i}`}
-        onClick={(e) => console.log('hello')}
+        onClick={e => props.onClick(e, d, level)}
       >
         { showImages ? [pathSvg, imageSvg] : [pathSvg, textSvg] }
       </g>

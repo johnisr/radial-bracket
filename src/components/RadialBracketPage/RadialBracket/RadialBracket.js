@@ -40,6 +40,7 @@ const RadialBracket = (props) => {
         inner={pieSize[i]}
         round={bracket.slice(Math.pow(2, i), Math.pow(2, i+1))} 
         data={props.data}
+        onClick={props.onClick}
       />)
   };
 
