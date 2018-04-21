@@ -41,7 +41,7 @@ class RadialBracketPage extends React.Component {
       width: 0,
     },
     title: '',
-    activeTeam: null,
+    activeTeamIndex: -1,
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
@@ -62,7 +62,6 @@ class RadialBracketPage extends React.Component {
     this.defaultOrder(west,east).forEach(team => {
       bracket.push({team, wins: 0 });
     })
-    console.log(bracket);
 
     this.setState(() => ({ bracket }));
   }
@@ -161,11 +160,29 @@ class RadialBracketPage extends React.Component {
   onSubmit = () => {
     console.log('submit!');
   }
+  onActiveTeamChange = (e) => {
+    const activeTeamIndex = e.target.value;
+    this.setState(() => ({ activeTeamIndex }));
+  }
+  onColorChange = (colorIndex) => {
+    const teams = this.state.teams;
+    const index = this.state.activeTeamIndex;
+    teams[index].color = colorIndex;
+    this.setState(() => ({
+      teams
+    }));
+    
+  }
   render() {
     return(
       <div className='RadialBracketPage'>
         <Header />
-        <RadialBracketTabs />
+        <RadialBracketTabs
+          teams={this.state.teams}
+          onActiveTeamChange={this.onActiveTeamChange}
+          activeTeamIndex={this.state.activeTeamIndex}
+          onColorChange={this.onColorChange}
+        />
         <RadialBracket data={this.state} onClick={this.onSvgClick} />
         <RadialBracketInput
           title={this.state.title}

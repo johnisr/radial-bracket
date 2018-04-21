@@ -15,8 +15,6 @@ const RadialBracketModal = (props) => {
       transform: `translate(-50%, -50%)`,
     }
   };
-
-  console.log(customStyles.content);
   
   return (
     <Modal

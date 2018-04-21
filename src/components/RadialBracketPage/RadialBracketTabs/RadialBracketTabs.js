@@ -11,7 +11,12 @@ const RadialBracketTabs = (props) => (
 
     <TabPanels>
       <TabPanel>
-        <RadialBracketColours />
+        <RadialBracketColours
+          teams={props.teams}
+          onActiveTeamChange={props.onActiveTeamChange}
+          activeTeamIndex={props.activeTeamIndex}
+          onColorChange={props.onColorChange}
+        />
       </TabPanel>
       <TabPanel>
         Another
