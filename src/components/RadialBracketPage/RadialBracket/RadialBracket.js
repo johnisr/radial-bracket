@@ -1,8 +1,10 @@
 import React from 'react';
+import RadialBracketPie from './RadialBracketPie/RadialBracketPie';
 
 const RadialBracket = () => (
   <div>
-    RadialBracket
+    This is from RadialBracket
+    <RadialBracketPie />
   </div>
 );
 

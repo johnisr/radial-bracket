@@ -50,14 +50,10 @@ export class Tabs extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      activeIndex: this.props.activeIndex ? this.props.activeIndex : 0
+      activeIndex: 0,
     };
   }
   selectTabIndex(activeIndex) {
-    this.setState({ activeIndex });
-  }
-  componentWillReceiveProps = (nextProps) => {
-    const { activeIndex } = nextProps;
     this.setState({ activeIndex });
   }
   
