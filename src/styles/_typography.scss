@@ -1,0 +1,16 @@
+%heading {
+  font-family: $font-display;
+  font-weight: 400;
+}
+
+.heading-1 {
+  @extend %heading;
+  font-size: 4.5rem;
+  color: $color-grey-light-1;
+  line-height: 1;
+}
+
+.margin-bottom-small { margin-bottom: 2rem; }
+.margin-bottom-medium { margin-bottom: 3rem; }
+.margin-bottom-large { margin-bottom: 4rem; }
+.margin-bottom-huge { margin-bottom: 8rem; }

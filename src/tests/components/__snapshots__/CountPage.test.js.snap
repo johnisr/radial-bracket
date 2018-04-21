@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CountPage 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <CountPage
+    count={
+        Object {
+            "count": 2,
+          }
+    }
+    decrement={[Function]}
+    increment={[Function]}
+    reset={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <h1
+          className="heading-1 margin-bottom-large"
+>
+          Count: 
+          2
+</h1>,
+        <button
+          className="count__btn"
+          onClick={[Function]}
+>
+          +
+</button>,
+        <button
+          className="count__btn"
+          onClick={[Function]}
+>
+          -
+</button>,
+        <button
+          className="count__btn"
+          onClick={[Function]}
+>
+          Reset
+</button>,
+      ],
+      "className": "count",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "Count: ",
+            2,
+          ],
+          "className": "heading-1 margin-bottom-large",
+        },
+        "ref": null,
+        "rendered": Array [
+          "Count: ",
+          2,
+        ],
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "+",
+          "className": "count__btn",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "+",
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "-",
+          "className": "count__btn",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "-",
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Reset",
+          "className": "count__btn",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Reset",
+        "type": "button",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1
+            className="heading-1 margin-bottom-large"
+>
+            Count: 
+            2
+</h1>,
+          <button
+            className="count__btn"
+            onClick={[Function]}
+>
+            +
+</button>,
+          <button
+            className="count__btn"
+            onClick={[Function]}
+>
+            -
+</button>,
+          <button
+            className="count__btn"
+            onClick={[Function]}
+>
+            Reset
+</button>,
+        ],
+        "className": "count",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Count: ",
+              2,
+            ],
+            "className": "heading-1 margin-bottom-large",
+          },
+          "ref": null,
+          "rendered": Array [
+            "Count: ",
+            2,
+          ],
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "+",
+            "className": "count__btn",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "+",
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "-",
+            "className": "count__btn",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "-",
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Reset",
+            "className": "count__btn",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Reset",
+          "type": "button",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
