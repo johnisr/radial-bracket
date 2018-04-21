@@ -2,6 +2,7 @@ import React from 'react';
 import { arc, pie } from 'd3-shape';
 import nbaColours from '../../../../data/nbaColours';
 import nbaLogos from '../../../../data/nbaLogos';
+import './RadialBracketPie.css';
 
 const RadialBracketPie = (props) => {
   // Props
@@ -11,6 +12,7 @@ const RadialBracketPie = (props) => {
   const dimensions = props.data.dimensions;
   const margin = props.data.margin;
   const showImages = props.data.showImages;
+  const showWins = props.data.showWins;
 
   // Derived From Props
   const level = Math.log2(round.length);
@@ -61,6 +63,9 @@ const RadialBracketPie = (props) => {
   }
 
   const  getTextFontSize = () => {
+    if (showWins && level > 3) {
+      return width / 24;
+    }
     return width / 18.75 + (3 * (5 - level));
   };
 
@@ -72,6 +77,98 @@ const RadialBracketPie = (props) => {
     }
     return `translate(${path.centroid(d)})`;
   }
+
+  // winsPath Functions
+  const getPathId = (d, i) => (
+    `winsPath__${level}--${i}`
+  );
+  const getWinsPath = (d) => {
+    if (level < 3) return path;
+    const firstArcRegex = /(^.+?)L/;
+    let newArc = firstArcRegex.exec(path(d))[1];
+    newArc = newArc.replace(/,/g, ' ');
+
+    if (d.endAngle >= 90 * Math.PI/180 && d.endAngle < 270 * Math.PI/180) {
+      console.log(newArc);
+      const startLoc = /M(.*?)A/;
+      //Everything between the capital A and 0 0 1
+      let middleLoc = /A(.*?)0 0 1/;
+      
+      //Everything between the 0 0 1 and the end of the string (denoted by $)
+      let endLoc = /0 0 1 (.*?)$/;
+    
+      //Flip the direction of the arc by switching the start and end point
+      //and using a 0 (instead of 1) sweep flag
+      if (endLoc.exec(newArc) === null) {
+        endLoc = /0 1 1(.*?)$/;
+        middleLoc = /A(.*?)0 1 1/;
+      }
+      const newStart = endLoc.exec( newArc )[1];
+      const newEnd = startLoc.exec( newArc )[1];
+      const middleSec = middleLoc.exec( newArc )[1];
+
+      //Build up the new arc notation, set the sweep-flag to 0
+      newArc = "M" + newStart + "A" + middleSec + "0 0 0 " + newEnd;
+    }
+    return newArc;
+  };
+
+  // winsText Functions
+  const getWinsTextFontSize = (level) => (
+    width / 18.75 + (3 * (5 - level))
+  );
+
+  const getWinsTextShiftY = (d, i) => {
+    if (level === 0) return; // don't display this
+    if (level === 1) {
+      return `${outer - inner + 45}`;
+    }
+    if (level === 2) {
+      if (i === 0 || i === 3) {
+        return `${outer - inner - 60}`;
+      }
+      if (i === 1 || i == 2) {
+        return `${outer - inner - 15}`;
+      }
+    }
+    let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
+    if (angle > 90 && angle < 270) {
+      return `-${outer - inner - 40}`;
+    }
+    return `${outer - inner - 15}`;
+  };
+  const getWinsTextShiftX = (d, i) => {
+    if (level === 1) {
+      return i === 1 ? '-25' : '1';
+    }
+    if (level === 2) {
+      if (i === 0 || i === 1) {
+        return width / 4 - 25;
+      } else {
+        return -width / 4;
+      }
+    }
+    return null;
+  };
+
+  const getWinsTextPathLink = (d, i) => (
+    `#winsPath__${level}--${i}`
+  );
+
+  const getwinsTextPathOffset = (d, i) => {
+    console.log(d);
+    if (level === 1) {
+      return '20%';
+    }
+    let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
+    if (level === 2) {
+      return null;
+    }
+    if (angle > 90 && angle < 270) {
+      return i % 2 === 0 ? `1%` : `${80 + 7 * (4-level)}%`;
+    } 
+    return i % 2 === 0 ? `${80 + 7 * (4-level)}%` : `1%`;
+  };
 
   //Data Setup
   const arcs = pie().value(1)(round);
@@ -92,45 +189,97 @@ const RadialBracketPie = (props) => {
         ></path>
     );
 
-    // Text SVG
-    const textTransform = getTextTransform(d, i, round);
-    const textFontSize = getTextFontSize();
+    let textSvg = null;
+    if (!showImages) {
+      // Text SVG
+      const textTransform = getTextTransform(d, i, round);
+      const textFontSize = getTextFontSize();
+  
+      textSvg = (
+        <text
+          key={`text__${level}--${i}`}
+          className={`RadialBracketPie__text`}
+          transform={textTransform}
+          dy={textY}
+          textAnchor={'middle'}
+          fontSize={textFontSize}
+          fill={'white'}
+        >
+          {d.data.team.name ? d.data.team.name : null }
+        </text>
+      );
+    }
 
-    const textSvg = (
-      <text
-        key={`text__${level}--${i}`}
-        className={`RadialBracketPie__text`}
-        transform={textTransform}
-        dy={textY}
-        textAnchor={'middle'}
-        fontSize={textFontSize}
-        fill={'white'}
-      >
-        {d.data.team.name ? d.data.team.name : null }
-      </text>
-    );
+    let imageSvg = null;
+    if (showImages) {
+      // Image SVG
+      const imageTransform = getImageTransform(d, i, round)
+      const imageLink = d.data.team.name !== '' ? nbaLogos[d.data.team.name][d.data.team.logo] : '#';
+      imageSvg = (
+        <image
+          key={`image__${level}--${i}`}
+          href={imageLink}
+          height={imageHeight}
+          width={imageWidth}
+          x={-imageWidth / 2}
+          y={-imageHeight / 2}
+          transform={imageTransform}
+        ></image>
+      );
+    }
 
-     // Image SVG
-     const imageTransform = getImageTransform(d, i, round)
-     const imageLink = d.data.team.name !== '' ? nbaLogos[d.data.team.name][d.data.team.logo] : '#';
-     const imageSvg = (
-       <image
-         key={`image__${level}--${i}`}
-         href={imageLink}
-         height={imageHeight}
-         width={imageWidth}
-         x={-imageWidth / 2}
-         y={-imageHeight / 2}
-         transform={imageTransform}
-       ></image>
-     );
+    let winsSvg = null;
+    let winsTextSvg = null;
+    if (showWins && level !== 0) {
+      const winsPathId = getPathId(d, i);
+      const winsPath = getWinsPath(d);
+      winsSvg = (
+        <path
+          key={`winsPath__${level}--${i}`}
+          className={'winsPath'}
+          id={winsPathId}
+          d={winsPath}
+        ></path>
+      );
+  
+      const winsTextFontSize = getWinsTextFontSize(level);
+      const winsTextShiftY = getWinsTextShiftY(d, i);
+      const winsTextShiftX = getWinsTextShiftX(d, i);
+      
+      const winsTextPathLink = getWinsTextPathLink(d, i);
+      const winsTextPathOffset = getwinsTextPathOffset(d, i);
+      winsTextSvg = (
+        <text
+          key={`winsText__${level}--${i}`}
+          className={'winsText'}
+          fontSize={winsTextFontSize}
+          dy={winsTextShiftY}
+          dx={winsTextShiftX}
+          fill={'white'}
+          stroke={'black'}
+        >
+          <textPath
+            xlinkHref={winsTextPathLink}
+            startOffset={winsTextPathOffset}
+          >
+            {d.data.team.name !== '' ? d.data.wins : ''}
+          </textPath>
+        </text>
+      );
+    }
+
+    const finalSvg = [pathSvg];
+    if (textSvg !== null) finalSvg.push(textSvg);
+    if (imageSvg !== null) finalSvg.push(imageSvg);
+    if (winsSvg !== null) finalSvg.push(winsSvg);
+    if (winsTextSvg !== null) finalSvg.push(winsTextSvg);
 
     return (
       <g
         key={`group__${level}--${i}`}
         onClick={e => props.onClick(e, d, level)}
       >
-        { showImages ? [pathSvg, imageSvg] : [pathSvg, textSvg] }
+        { [finalSvg] }
       </g>
   );
   })

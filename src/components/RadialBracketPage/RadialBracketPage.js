@@ -117,6 +117,11 @@ class RadialBracketPage extends React.Component {
       bracket[index].wins = 4;
       bracket[otherIndex].wins = value - 4;
       bracket[Math.floor(index / 2)].team = bracket[index].team;
+
+      // Clear 2 levels down and on since the winner changed
+      for (let i = Math.floor(index / 4); i > 0; i = Math.floor(i / 2)) {
+        bracket[i] = {team: { name: '' }, wins: 0 };
+      }
     }
     this.setState(() => ({
       modal: {
