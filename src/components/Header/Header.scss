@@ -1,0 +1,13 @@
+@import '../../styles/base';
+
+.header {
+  background-color: $color-grey-dark-1;
+  text-align: center;
+  display: flex;
+  
+  &__title {
+    color: $color-grey-light-1;
+    margin: 0 2rem;
+  }
+
+}

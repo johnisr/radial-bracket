@@ -176,25 +176,35 @@ class RadialBracketPage extends React.Component {
   render() {
     return(
       <div className='RadialBracketPage'>
-        <Header />
-        <RadialBracketTabs
-          teams={this.state.teams}
-          onActiveTeamChange={this.onActiveTeamChange}
-          activeTeamIndex={this.state.activeTeamIndex}
-          onColorChange={this.onColorChange}
-        />
-        <RadialBracket data={this.state} onClick={this.onSvgClick} />
-        <RadialBracketInput
-          title={this.state.title}
-          showWins={this.state.showWins}
-          showImages={this.state.showImages}
-          onTitleChange={this.onTitleChange}
-          onShowWinsClick={this.onShowWinsClick}
-          onShowImagesClick={this.onShowImagesClick}
-          onResetClick={this.onResetClick}
-          onSubmit={this.onSubmit}
-        />
-        <RadialBracketModal data={this.state.modal} onModalClose={this.onModalClose}/>
+        <div className="RadialBracketPage__row">
+          <section className="section__full-start-end">
+            <Header />
+          </section>
+          <section className="section__center-start-end">
+            <RadialBracketTabs
+              teams={this.state.teams}
+              onActiveTeamChange={this.onActiveTeamChange}
+              activeTeamIndex={this.state.activeTeamIndex}
+              onColorChange={this.onColorChange}
+            />
+          </section>
+          <section className="section__center-6-start-end">
+            <RadialBracket data={this.state} onClick={this.onSvgClick} />
+          </section>
+          <section className="section__center-6-start-end">
+            <RadialBracketInput
+              title={this.state.title}
+              showWins={this.state.showWins}
+              showImages={this.state.showImages}
+              onTitleChange={this.onTitleChange}
+              onShowWinsClick={this.onShowWinsClick}
+              onShowImagesClick={this.onShowImagesClick}
+              onResetClick={this.onResetClick}
+              onSubmit={this.onSubmit}
+            />
+          </section>
+          <RadialBracketModal data={this.state.modal} onModalClose={this.onModalClose}/>
+        </div>
       </div>
     );
   };

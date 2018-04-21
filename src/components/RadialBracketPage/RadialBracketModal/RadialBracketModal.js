@@ -8,8 +8,8 @@ const RadialBracketModal = (props) => {
 
   const customStyles = {
     content : {
-      top: `${y}px`,
-      left: `${x}px`,
+      top: `50%`,
+      left: `50%`,
       right: 'auto',
       bottom: 'auto',
       transform: `translate(-50%, -50%)`,

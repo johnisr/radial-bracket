@@ -6,7 +6,7 @@ const RadialBracketTabs = (props) => (
   <Tabs>
     <TabList>
       <Tab>Change Colors</Tab>
-      <Tab>Other</Tab>
+      <Tab></Tab>
     </TabList>
 
     <TabPanels>
@@ -19,7 +19,7 @@ const RadialBracketTabs = (props) => (
         />
       </TabPanel>
       <TabPanel>
-        Another
+        
       </TabPanel>
     </TabPanels>
   </Tabs>

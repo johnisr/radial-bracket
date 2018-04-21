@@ -1,5 +1,6 @@
 import React from 'react';
 import RadialBracketPie from './RadialBracketPie/RadialBracketPie';
+import './RadialBracket.css';
 
 const RadialBracket = (props) => {
   // Props
@@ -45,37 +46,40 @@ const RadialBracket = (props) => {
   };
 
   return (
-    <svg width={svgDimensions[0]} height={svgDimensions[1]}>
-      <g
-        className="origin"
-        transform={`translate(${margin.left}, ${margin.top})`}
-      >
-        <text
-          className="pie__pre-title"
-          x={width / 2}
-          y={preTitleShiftY}
-          textAnchor={'middle'}
-          fontSize={preTitleSize}
-        >
-          {titleText}
-        </text>
-        <text
-          className="pie__title"
-          x={width / 2}
-          y={titleShiftY}
-          fontSize={titleSize}
-          textAnchor={'middle'}
-        >
-          {props.data.title}
-        </text>
+    <div className="RadialBracket">
+      <svg width={svgDimensions[0]} height={svgDimensions[1]}>
         <g
-          className="chart"
-          transform={`translate(${width /2}, ${height / 2})`}
+          className="origin"
+          transform={`translate(${margin.left}, ${margin.top})`}
         >
-          {radialBracket}
+          <text
+            className="pie__pre-title"
+            x={width / 2}
+            y={preTitleShiftY}
+            textAnchor={'middle'}
+            fontSize={preTitleSize}
+          >
+            {titleText}
+          </text>
+          <text
+            className="pie__title"
+            x={width / 2}
+            y={titleShiftY}
+            fontSize={titleSize}
+            textAnchor={'middle'}
+          >
+            {props.data.title}
+          </text>
+          <g
+            className="chart"
+            transform={`translate(${width /2}, ${height / 2})`}
+          >
+            {radialBracket}
+          </g>
         </g>
-      </g>
-    </svg>
+      </svg>
+
+    </div>
   );
 };
 

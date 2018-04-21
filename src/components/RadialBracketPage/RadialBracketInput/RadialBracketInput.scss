@@ -1,0 +1,57 @@
+@import '../../../styles/base';
+
+.RadialBracketInput {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  &__button {
+    font-size: $font-size-body;
+    padding: .5rem 1rem;
+    color: $color-grey-light-2;
+    background-color: $color-grey-dark-3;
+    border-radius: .3rem;
+
+    margin: 0 2rem;
+
+    border: none;
+    cursor: pointer;
+
+    text-align: center;
+
+    &:hover {
+      background-color: lighten($color-grey-dark-3, 20%);
+      transform: translateY(-.3rem);
+      box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+      background-color: lighten($color-grey-dark-3, 10%);
+      transform: translateY(-1px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,0.2);
+    }
+
+    &--primary {
+      padding: 1rem 2rem;
+      background-color: green;
+
+      &:hover {
+        background-color: lighten(green, 10%);
+
+      }
+  
+      &:active,
+      &:focus {
+        outline: none;
+        background-color: lighten(green, 5%);
+      }
+    }
+  }
+
+  &__input {
+    font-size: $font-size-body;
+    padding: 1rem 2rem;
+  }
+}

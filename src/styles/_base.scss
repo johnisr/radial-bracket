@@ -44,3 +44,17 @@ body {
   line-height: 1.6;
   font-family: $font-primary;
 }
+
+.section {
+  &__full-start-end {
+    grid-column: full-start / full-end;
+  }
+
+  &__center-start-end {
+    grid-column: center-start / center-end;
+  }
+
+  &__center-6-start-end {
+    grid-column: col-start 2 / col-end 7;
+  }
+}
