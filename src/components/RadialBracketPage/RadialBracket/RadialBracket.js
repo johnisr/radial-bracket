@@ -59,6 +59,15 @@ const RadialBracket = (props) => {
         >
           {titleText}
         </text>
+        <text
+          className="pie__title"
+          x={width / 2}
+          y={titleShiftY}
+          fontSize={titleSize}
+          textAnchor={'middle'}
+        >
+          {props.data.title}
+        </text>
         <g
           className="chart"
           transform={`translate(${width /2}, ${height / 2})`}

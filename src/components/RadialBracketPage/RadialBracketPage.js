@@ -40,6 +40,8 @@ class RadialBracketPage extends React.Component {
       otherIndex: 0,
       width: 0,
     },
+    title: '',
+    activeTeam: null,
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
@@ -76,7 +78,7 @@ class RadialBracketPage extends React.Component {
       console.log('current team not set');
       return;
     }
-    const currentIndex = index;
+
     let otherIndex;
     if (index % 2 === 0) {
       if (bracket[index + 1].team.name === '') {
@@ -135,13 +137,46 @@ class RadialBracketPage extends React.Component {
       bracket,
     }));
   }
+  onTitleChange = (e) => {
+    const title = e.target.value;
+    this.setState(() => ({ title }));
+  }
+  onResetClick = () => {
+    console.log('called');
+    const bracket = this.state.bracket;
+    for (let i = 0; i < bracket.length / 2; i++) {
+      bracket[i] = {team: { name: '' }, wins: 0 };
+    }
+    for (let i= bracket.length / 2; i < bracket.length; i++) {
+      bracket[i].wins = 0;
+    }
+    this.setState(() => ({ bracket }));
+  };
+  onShowWinsClick = () => {
+    this.setState(() => ({ showWins: !this.state.showWins }));
+  }
+  onShowImagesClick = () => {
+    this.setState(() => ({ showImages: !this.state.showImages }));
+  }
+  onSubmit = () => {
+    console.log('submit!');
+  }
   render() {
     return(
       <div className='RadialBracketPage'>
         <Header />
         <RadialBracketTabs />
         <RadialBracket data={this.state} onClick={this.onSvgClick} />
-        <RadialBracketInput />
+        <RadialBracketInput
+          title={this.state.title}
+          showWins={this.state.showWins}
+          showImages={this.state.showImages}
+          onTitleChange={this.onTitleChange}
+          onShowWinsClick={this.onShowWinsClick}
+          onShowImagesClick={this.onShowImagesClick}
+          onResetClick={this.onResetClick}
+          onSubmit={this.onSubmit}
+        />
         <RadialBracketModal data={this.state.modal} onModalClose={this.onModalClose}/>
       </div>
     );
