@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
-import RadialBracketContainer from './playground/RadialBracketContainer';
+// import RadialBracketContainer from './playground/RadialBracketContainer';
 
 import configureStore from './store/configureStore';
 
@@ -17,5 +17,5 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(<RadialBracketContainer />, document.getElementById('root'));
+ReactDOM.render(jsx, document.getElementById('root'));
 registerServiceWorker();

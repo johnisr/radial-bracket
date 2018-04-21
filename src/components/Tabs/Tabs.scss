@@ -1,0 +1,49 @@
+@import '../../styles/base';
+
+.tabs {
+  display: flex;
+  margin-top: 2rem;
+  background-color: darken($color-grey-light-1, 10%);
+}
+
+.tab {
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: $color-grey-dark-2;
+  background-color: darken($color-grey-light-1, 10%);
+  cursor: pointer;
+  font-family: $font-display;
+  
+  
+  &:hover {
+    background-color: $color-grey-light-2;
+    
+  }
+  
+  &:active {
+    background-color: $color-grey-light-2;
+  }
+  
+  &--active {
+    background-color: $color-grey-light-2;
+  }
+
+  &--disabled {
+    opacity: .4;
+    cursor: auto;
+
+    &:hover {
+      background-color: $color-grey-light-1;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+    
+  }
+}
+
+.tabPanels {
+  background-color: $color-grey-light-2;
+  padding: 2rem;
+}
