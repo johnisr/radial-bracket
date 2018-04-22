@@ -46,7 +46,15 @@ const RadialBracket = (props) => {
 
   return (
     <div className="RadialBracket">
-      <svg viewBox={`0 0 ${svgDimensions[0]} ${svgDimensions[1]}`} id="svg">
+      <svg
+        version="1.1"
+        baseProfile="full"
+        xmlns="http://www.w3.org/2000/svg"
+        className="RadialBracket__svg"
+        viewBox={`0 0 ${svgDimensions[0]} ${svgDimensions[1]}`}
+        preserveAspectRatio={'xMidYMid meet'}
+        id="svg"
+      >
         <g
           className="origin"
           transform={`translate(${margin.left}, ${margin.top})`}
