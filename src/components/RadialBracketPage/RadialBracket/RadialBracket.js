@@ -46,7 +46,7 @@ const RadialBracket = (props) => {
 
   return (
     <div className="RadialBracket">
-      <svg width={svgDimensions[0]} height={svgDimensions[1]} id="svg">
+      <svg viewBox={`0 0 ${svgDimensions[0]} ${svgDimensions[1]}`} id="svg">
         <g
           className="origin"
           transform={`translate(${margin.left}, ${margin.top})`}

@@ -14,10 +14,9 @@ import utaLogo from './logo/uta_logo.svg';
 import okcLogo from './logo/okc_logo.svg';
 import minLogo from './logo/min_logo.svg';
 import houLogo from './logo/hou_logo.svg';
-import torLogo1 from './logo/tor_logo1.png';
 
 export default {
-  TOR: [ torLogo1 ],
+  TOR: [ torLogo ],
   WAS: [ wasLogo ],
   CLE: [ cleLogo ],
   IND: [ indLogo ],
