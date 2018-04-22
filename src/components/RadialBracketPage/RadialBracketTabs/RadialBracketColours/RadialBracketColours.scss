@@ -1,0 +1,28 @@
+@import '../../../../styles/base';
+
+.RadialBracketColours {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(6rem, 1fr));
+  grid-gap: 1rem;
+  margin: 0 2rem;
+  align-items: center;
+  justify-content: center;
+
+  &__select {
+    padding: .5rem 1rem;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    font-size: $font-size-quarternary;
+  }
+
+  &__colours {
+    padding: 1rem 2rem;
+    color: white;
+    font-family: roboto;
+    font-size: $font-size-quarternary;
+    text-align: center;
+    border-radius: .3rem;
+
+  }
+}

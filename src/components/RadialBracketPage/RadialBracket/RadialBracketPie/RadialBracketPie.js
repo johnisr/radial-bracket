@@ -127,7 +127,7 @@ const RadialBracketPie = (props) => {
       if (i === 0 || i === 3) {
         return `${outer - inner - 60}`;
       }
-      if (i === 1 || i == 2) {
+      if (i === 1 || i === 2) {
         return `${outer - inner - 15}`;
       }
     }

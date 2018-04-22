@@ -5,6 +5,7 @@ import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 import './RadialBracketPage.css';
+import { startSubmitBracket } from '../../actions/bracket';
 
 class RadialBracketPage extends React.Component {
   state = {
@@ -12,7 +13,6 @@ class RadialBracketPage extends React.Component {
     margin: { top: 70, right: 0, bottom: 0, left: 0 },
     showWins: false,
     showImages: false,
-    showCompleted: false,
     teams : [
       { name: "TOR", full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
       { name: "WAS", full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
@@ -40,17 +40,19 @@ class RadialBracketPage extends React.Component {
       otherIndex: 0,
       width: 0,
     },
-    title: '',
+    name: '',
     activeTeamIndex: -1,
+    errorMessage: '',
+    completedMessage: '',
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
     return order.concat([west[0], west[7], west[3], west[4], west[2], west[5], west[1], west[6]]);
   }
   componentDidMount() {
-    const bracket = [];
+    let bracket = [];
     for (let i = 0; i < this.state.teams.length; i++) {
-      bracket.push({team: { name: '' }, wins: 0 });
+      bracket.push({team: { name: '' }, wins: 0, completed: false });
     };
     const west = [];
     const east = [];
@@ -60,10 +62,19 @@ class RadialBracketPage extends React.Component {
     east.sort((a, b) => a.place - b.place);
     west.sort((a, b) => a.place - b.place);
     this.defaultOrder(west,east).forEach(team => {
-      bracket.push({team, wins: 0 });
+      bracket.push({team, wins: 0, completed: false });
     })
 
+    bracket = this.updateBracket(bracket);
     this.setState(() => ({ bracket }));
+  }
+  updateBracket(bracket) {
+    // First Round
+    bracket[29].wins = 4;
+    bracket[29].completed = true;
+    bracket[28].completed = true;
+    bracket[14].team = bracket[29].team;
+    return bracket;
   }
   onSvgClick = (e, d, level) => {
     const index = Math.pow(2, level) + d.index;
@@ -75,6 +86,11 @@ class RadialBracketPage extends React.Component {
     const bracket = this.state.bracket;
     if (bracket[index].team.name === '') {
       console.log('current team not set');
+      return;
+    }
+
+    if(bracket[index].completed === true) {
+      console.log('This has already been decided');
       return;
     }
 
@@ -136,9 +152,9 @@ class RadialBracketPage extends React.Component {
       bracket,
     }));
   }
-  onTitleChange = (e) => {
-    const title = e.target.value;
-    this.setState(() => ({ title }));
+  onNameChange = (e) => {
+    const name = e.target.value;
+    this.setState(() => ({ name }));
   }
   onResetClick = () => {
     console.log('called');
@@ -158,7 +174,8 @@ class RadialBracketPage extends React.Component {
     this.setState(() => ({ showImages: !this.state.showImages }));
   }
   onSubmit = () => {
-    console.log('submit!');
+    startSubmitBracket(this.state);
+    console.log('yay');
   }
   onActiveTeamChange = (e) => {
     const activeTeamIndex = e.target.value;
@@ -196,7 +213,7 @@ class RadialBracketPage extends React.Component {
               title={this.state.title}
               showWins={this.state.showWins}
               showImages={this.state.showImages}
-              onTitleChange={this.onTitleChange}
+              onNameChange={this.onNameChange}
               onShowWinsClick={this.onShowWinsClick}
               onShowImagesClick={this.onShowImagesClick}
               onResetClick={this.onResetClick}

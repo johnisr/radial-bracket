@@ -68,7 +68,7 @@ const RadialBracket = (props) => {
             fontSize={titleSize}
             textAnchor={'middle'}
           >
-            {props.data.title}
+            {props.data.name}
           </text>
           <g
             className="chart"

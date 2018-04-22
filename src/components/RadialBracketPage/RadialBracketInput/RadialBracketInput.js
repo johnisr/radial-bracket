@@ -25,7 +25,7 @@ const RadialBracketInput = (props) => {
           onClick={props.onShowImagesClick}
           className="RadialBracketInput__button"
         >
-          {props.showImages ? 'Hide Logos' : 'Show Logos'} 
+          {props.showImages ? 'Show Text' : 'Show Logos'} 
         </button>
       </div>
       <div className="RadialBracketInput__submitGroup">
@@ -33,7 +33,7 @@ const RadialBracketInput = (props) => {
           type="text"
           placeholder="Type Username here"
           value={props.title}
-          onChange={props.onTitleChange}
+          onChange={props.onNameChange}
           className="RadialBracketInput__input"
         />
         <button

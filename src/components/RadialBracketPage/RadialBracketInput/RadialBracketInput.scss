@@ -3,16 +3,17 @@
 .RadialBracketInput {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
 
   &__button {
-    font-size: $font-size-body;
-    padding: .5rem 1rem;
+    font-size: $font-size-quarternary;
+    padding: .75rem 1.5rem;
     color: $color-grey-light-2;
     background-color: $color-grey-dark-3;
     border-radius: .3rem;
 
-    margin: 0 2rem;
+    margin: 0 1rem;
 
     border: none;
     cursor: pointer;
@@ -51,7 +52,9 @@
   }
 
   &__input {
-    font-size: $font-size-body;
+    font-size: $font-size-quarternary;
     padding: 1rem 2rem;
+    border-radius: .3rem;
+    border: 3px solid $color-grey-light-2;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import nbaColours from '../../../../data/nbaColours';
+import './RadialBracketColours.css';
 
 const RadialBracketColours = (props) => {
 
@@ -11,8 +12,12 @@ const RadialBracketColours = (props) => {
   }
   
   return (
-    <div>
-      <select value={props.activeTeam} onChange={props.onActiveTeamChange}>
+    <div className="RadialBracketColours">
+      <select 
+        value={props.activeTeam}
+        onChange={props.onActiveTeamChange}
+        className="RadialBracketColours__select"
+      >
           <option key={'zero'} value={-1}>Select Team to Edit</option>
         {
           teams.map((team, i) => (
@@ -29,6 +34,7 @@ const RadialBracketColours = (props) => {
             style={{ backgroundColor: `${color.color}` }}
             onClick={() => props.onColorChange(i)}
             value={i}
+            className="RadialBracketColours__colours"
           >
             {teams[props.activeTeamIndex].name}
           </div>
