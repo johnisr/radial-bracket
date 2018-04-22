@@ -6,6 +6,7 @@
     "d3-shape": "^1.2.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "fabric": "^2.2.3",
     "firebase": "^4.12.1",
     "moment": "^2.22.1",
     "node-sass-chokidar": "^1.2.2",

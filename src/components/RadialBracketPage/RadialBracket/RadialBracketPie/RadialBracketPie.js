@@ -255,7 +255,6 @@ const RadialBracketPie = (props) => {
           dy={winsTextShiftY}
           dx={winsTextShiftX}
           fill={'white'}
-          stroke={'black'}
         >
           <textPath
             xlinkHref={winsTextPathLink}

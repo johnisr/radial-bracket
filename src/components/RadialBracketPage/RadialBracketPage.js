@@ -7,6 +7,7 @@ import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 import './RadialBracketPage.css';
 import baseBracket from '../../data/baseBracket';
 import { startSubmitBracket } from '../../actions/bracket';
+import { saveSvgAsPng } from 'save-svg-as-png';
 
 class RadialBracketPage extends React.Component {
   state = {
@@ -43,6 +44,7 @@ class RadialBracketPage extends React.Component {
     },
     name: '',
     activeTeamIndex: -1,
+    hasSubmitted: false,
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
@@ -173,8 +175,11 @@ class RadialBracketPage extends React.Component {
     this.setState(() => ({ showImages: !this.state.showImages }));
   }
   onSubmit = () => {
-    startSubmitBracket(this.state);
-    console.log('submitted');
+    if (!this.state.hasSubmitted) {
+      const hasSubmitted = startSubmitBracket(this.state);
+      this.setState(() => ({ hasSubmitted }));
+    }
+    saveSvgAsPng(document.getElementById('svg'), 'radialBracket.png');
   }
   onActiveTeamChange = (e) => {
     const activeTeamIndex = e.target.value;

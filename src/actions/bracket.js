@@ -14,6 +14,7 @@ export const startSubmitBracket = async (state = {}) => {
   console.log(data);
   try {
     await database.ref(`2018/nba`).push(data);
+    return true;
   } catch (e) {
     console.log(e);
     return false;
