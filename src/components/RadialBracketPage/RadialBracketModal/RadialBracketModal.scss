@@ -6,9 +6,47 @@
   }
 
   &__button {
-    padding: 0.5rem 1rem;
-    font-size: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: $font-size-quarternary;
+    background-color: $color-grey-dark-3;
     margin-top: 1rem;
+    color: white;
+
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: .3rem;
+
+    &:disabled {
+      cursor: auto;
+      opacity: 0.4;
+    }
+
+    &:hover {
+      background-color: lighten($color-grey-dark-3, 20%);
+      transform: translateY(-.3rem);
+      box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+
+      &:disabled {
+        background-color: $color-grey-dark-3;
+        transform: none;
+        box-shadow: none;
+      }
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+      background-color: lighten($color-grey-dark-3, 10%);
+      transform: translateY(-1px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,0.2);
+
+      &:disabled {
+        background-color: $color-grey-dark-3;
+        transform: none;
+        box-shadow: none;
+      }
+    }
     
     &:not(:last-child) {
       margin-right: 1rem;

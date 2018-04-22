@@ -32,7 +32,7 @@ const RadialBracketInput = (props) => {
         <input 
           type="text"
           placeholder="Type Username here"
-          value={props.title}
+          value={props.name}
           onChange={props.onNameChange}
           className="RadialBracketInput__input"
         />

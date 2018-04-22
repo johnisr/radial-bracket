@@ -63,7 +63,8 @@ class RadialBracketPage extends React.Component {
     // this.defaultOrder(west,east).forEach(team => {
     //   bracket.push({teamIndex: team.index, wins: 0 });
     // })
-    const bracket = baseBracket;
+    // Deep Copy Array using JSON methods
+    const bracket = JSON.parse(JSON.stringify(baseBracket));
     this.setState(() => ({ bracket }));
   }
   onSvgClick = (e, d, level) => {
@@ -152,6 +153,7 @@ class RadialBracketPage extends React.Component {
   }
   onNameChange = (e) => {
     const name = e.target.value;
+    if (name.length > 20) return;
     this.setState(() => ({ name }));
   }
   onResetClick = () => {
@@ -189,7 +191,6 @@ class RadialBracketPage extends React.Component {
   }
   render() {
     const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
-    console.log(`Submit is Disabled: ${isSubmitDisabled}`);
     return(
       <div className='RadialBracketPage'>
         <div className="RadialBracketPage__row">
@@ -209,7 +210,7 @@ class RadialBracketPage extends React.Component {
           </section>
           <section className="section__center-6-start-end">
             <RadialBracketInput
-              title={this.state.title}
+              name={this.state.name}
               showWins={this.state.showWins}
               showImages={this.state.showImages}
               onNameChange={this.onNameChange}

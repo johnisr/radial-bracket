@@ -90,7 +90,6 @@ const RadialBracketPie = (props) => {
     newArc = newArc.replace(/,/g, ' ');
 
     if (d.endAngle >= 90 * Math.PI/180 && d.endAngle < 270 * Math.PI/180) {
-      console.log(newArc);
       const startLoc = /M(.*?)A/;
       //Everything between the capital A and 0 0 1
       let middleLoc = /A(.*?)0 0 1/;
@@ -157,7 +156,6 @@ const RadialBracketPie = (props) => {
   );
 
   const getwinsTextPathOffset = (d, i) => {
-    console.log(d);
     if (level === 1) {
       return '20%';
     }

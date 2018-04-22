@@ -6,7 +6,6 @@ import './RadialBracketModal.css';
 const RadialBracketModal = (props) => {
   const { x, y, name, index, otherIndex } = props.data;
   const isVisible = x !== 0 && y !== 0 ? true : false;
-  console.log(index, otherIndex);
 
   const customStyles = {
     content : {
