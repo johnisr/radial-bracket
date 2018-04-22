@@ -6,7 +6,6 @@ const RadialBracketColours = (props) => {
 
   const teams = props.teams;
   let colors = [];
-  console.log(props.activeTeamIndex);
   if (props.activeTeamIndex >= 0) {
     colors = nbaColours[teams[props.activeTeamIndex].name];
   }
@@ -18,7 +17,7 @@ const RadialBracketColours = (props) => {
         onChange={props.onActiveTeamChange}
         className="RadialBracketColours__select"
       >
-          <option key={'zero'} value={-1}>Select Team to Edit</option>
+          <option key={'zero'} value={-1}>Select Team</option>
         {
           teams.map((team, i) => (
             <option key={i} value={i}>

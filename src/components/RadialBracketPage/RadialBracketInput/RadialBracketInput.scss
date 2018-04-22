@@ -20,10 +20,21 @@
 
     text-align: center;
 
+    &:disabled {
+      cursor: auto;
+    }
+    
+
     &:hover {
       background-color: lighten($color-grey-dark-3, 20%);
       transform: translateY(-.3rem);
       box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+
+      &:disabled {
+        background-color: $color-grey-dark-3;
+        transform: none;
+        box-shadow: none;
+      }
     }
 
     &:active,
@@ -32,14 +43,28 @@
       background-color: lighten($color-grey-dark-3, 10%);
       transform: translateY(-1px);
       box-shadow: 0 .5rem 1rem rgba(0,0,0,0.2);
+
+      &:disabled {
+        background-color: $color-grey-dark-3;
+        transform: none;
+        box-shadow: none;
+      }
     }
 
     &--primary {
       padding: 1rem 2rem;
       background-color: green;
 
+      &:disabled {
+        opacity: 0.5;
+      }
+
       &:hover {
         background-color: lighten(green, 10%);
+
+        &:disabled {
+          background-color: green;
+        }
 
       }
   
@@ -47,6 +72,10 @@
       &:focus {
         outline: none;
         background-color: lighten(green, 5%);
+
+        &:disabled {
+          background-color: green;
+        }
       }
     }
   }

@@ -5,6 +5,7 @@ import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 import './RadialBracketPage.css';
+import baseBracket from '../../data/baseBracket';
 import { startSubmitBracket } from '../../actions/bracket';
 
 class RadialBracketPage extends React.Component {
@@ -14,22 +15,22 @@ class RadialBracketPage extends React.Component {
     showWins: false,
     showImages: false,
     teams : [
-      { name: "TOR", full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
-      { name: "WAS", full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
-      { name: "CLE", full: 'Cleveland Cavaliers', color: 0, logo: 0, place: 4, conference: 'East' },
-      { name: "IND", full: 'Indiana Pacers', color: 0, logo: 0, place: 5, conference: 'East' },
-      { name: "PHI", full: 'Philadelphia 76ers', color: 0, logo: 0, place: 3, conference: 'East' },
-      { name: "MIA", full: 'Miami Heat', color: 0, logo: 0, place: 6, conference: 'East' },
-      { name: "BOS", full: 'Boston Celtics', color: 0, logo: 0, place: 2, conference: 'East' },
-      { name: "MIL", full: 'Milwaukee Bucks', color: 0, logo: 0, place: 7, conference: 'East' },
-      { name: "SAS", full: 'San Antonio Spurs', color: 0, logo: 0, place: 7, conference: 'West' },
-      { name: "GSW", full: 'Golden State Warriors', color: 0, logo: 0, place: 2, conference: 'West' },
-      { name: "NOP", full: 'New Orleans Pelicans', color: 0, logo: 0, place: 6, conference: 'West' },
-      { name: "POR", full: 'Portland Trailblazers', color: 0, logo: 0, place: 3, conference: 'West' },
-      { name: "UTA", full: 'Utah Jazz', color: 0, logo: 0, place: 5, conference: 'West' },
-      { name: "OKC", full: 'Oklahoma City Thunder', color: 0, logo: 0, place: 4, conference: 'West' },
-      { name: "MIN", full: 'Minnesota Timberwolves', color: 0, logo: 0, place: 8, conference: 'West' },
-      { name: "HOU", full: 'Houston Rockets', color: 0, logo: 0, place: 1, conference: 'West' },
+      { name: "TOR", index: 0, full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
+      { name: "WAS", index: 1, full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
+      { name: "CLE", index: 2, full: 'Cleveland Cavaliers', color: 0, logo: 0, place: 4, conference: 'East' },
+      { name: "IND", index: 3, full: 'Indiana Pacers', color: 0, logo: 0, place: 5, conference: 'East' },
+      { name: "PHI", index: 4, full: 'Philadelphia 76ers', color: 0, logo: 0, place: 3, conference: 'East' },
+      { name: "MIA", index: 5, full: 'Miami Heat', color: 0, logo: 0, place: 6, conference: 'East' },
+      { name: "BOS", index: 6, full: 'Boston Celtics', color: 0, logo: 0, place: 2, conference: 'East' },
+      { name: "MIL", index: 7, full: 'Milwaukee Bucks', color: 0, logo: 0, place: 7, conference: 'East' },
+      { name: "SAS", index: 8, full: 'San Antonio Spurs', color: 0, logo: 0, place: 7, conference: 'West' },
+      { name: "GSW", index: 9, full: 'Golden State Warriors', color: 0, logo: 0, place: 2, conference: 'West' },
+      { name: "NOP", index: 10, full: 'New Orleans Pelicans', color: 0, logo: 0, place: 6, conference: 'West' },
+      { name: "POR", index: 11, full: 'Portland Trailblazers', color: 0, logo: 0, place: 3, conference: 'West' },
+      { name: "UTA", index: 12, full: 'Utah Jazz', color: 0, logo: 0, place: 5, conference: 'West' },
+      { name: "OKC", index: 13, full: 'Oklahoma City Thunder', color: 0, logo: 0, place: 4, conference: 'West' },
+      { name: "MIN", index: 14, full: 'Minnesota Timberwolves', color: 0, logo: 0, place: 8, conference: 'West' },
+      { name: "HOU", index: 15, full: 'Houston Rockets', color: 0, logo: 0, place: 1, conference: 'West' },
     ],
     bracket: [],
     modal: {
@@ -42,39 +43,28 @@ class RadialBracketPage extends React.Component {
     },
     name: '',
     activeTeamIndex: -1,
-    errorMessage: '',
-    completedMessage: '',
   };
   defaultOrder(west, east) {
     const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
     return order.concat([west[0], west[7], west[3], west[4], west[2], west[5], west[1], west[6]]);
   }
   componentDidMount() {
-    let bracket = [];
-    for (let i = 0; i < this.state.teams.length; i++) {
-      bracket.push({team: { name: '' }, wins: 0, completed: false });
-    };
-    const west = [];
-    const east = [];
-    this.state.teams.forEach(team => {
-      team.conference === 'East' ? east.push(team) : west.push(team)
-    })
-    east.sort((a, b) => a.place - b.place);
-    west.sort((a, b) => a.place - b.place);
-    this.defaultOrder(west,east).forEach(team => {
-      bracket.push({team, wins: 0, completed: false });
-    })
-
-    bracket = this.updateBracket(bracket);
+    // let bracket = [];
+    // for (let i = 0; i < this.state.teams.length; i++) {
+    //   bracket.push({teamIndex: -1, wins: 0 });
+    // };
+    // const west = [];
+    // const east = [];
+    // this.state.teams.forEach(team => {
+    //   team.conference === 'East' ? east.push(team) : west.push(team)
+    // })
+    // east.sort((a, b) => a.place - b.place);
+    // west.sort((a, b) => a.place - b.place);
+    // this.defaultOrder(west,east).forEach(team => {
+    //   bracket.push({teamIndex: team.index, wins: 0 });
+    // })
+    const bracket = baseBracket;
     this.setState(() => ({ bracket }));
-  }
-  updateBracket(bracket) {
-    // First Round
-    bracket[29].wins = 4;
-    bracket[29].completed = true;
-    bracket[28].completed = true;
-    bracket[14].team = bracket[29].team;
-    return bracket;
   }
   onSvgClick = (e, d, level) => {
     const index = Math.pow(2, level) + d.index;
@@ -84,30 +74,38 @@ class RadialBracketPage extends React.Component {
     }
 
     const bracket = this.state.bracket;
-    if (bracket[index].team.name === '') {
+    if (bracket[index].teamIndex === -1) {
       console.log('current team not set');
       return;
     }
 
-    if(bracket[index].completed === true) {
-      console.log('This has already been decided');
+    if(baseBracket[index].wins === 4) {
+      const teamIndex = baseBracket[index].teamIndex;
+      console.log(`${this.state.teams[teamIndex].name} has already won`);
       return;
     }
 
     let otherIndex;
     if (index % 2 === 0) {
-      if (bracket[index + 1].team.name === '') {
+      if (bracket[index + 1].teamIndex === -1) {
         console.log('other team not set');
         return;
       }
       otherIndex = index + 1;
     } else {
-      if (bracket[index - 1].team.name === '') {
+      if (bracket[index - 1].teamIndex === -1) {
         console.log('other team not set');
         return;
       }
       otherIndex = index - 1;
     }
+
+    if(baseBracket[otherIndex].wins === 4) {
+      const teamIndex = baseBracket[otherIndex].teamIndex;
+      console.log(`${this.state.teams[teamIndex].name} has already won`);
+      return;
+    }
+
     const x = e.clientX;
     const y =  e.clientY;
 
@@ -115,7 +113,7 @@ class RadialBracketPage extends React.Component {
       modal: {
         x,
         y,
-        name: d.data.team.name,
+        name: this.state.teams[bracket[index].teamIndex].name,
         index,
         otherIndex,
         width: this.state.dimensions[0],
@@ -133,11 +131,11 @@ class RadialBracketPage extends React.Component {
       const value = e.target.value;
       bracket[index].wins = 4;
       bracket[otherIndex].wins = value - 4;
-      bracket[Math.floor(index / 2)].team = bracket[index].team;
+      bracket[Math.floor(index / 2)].teamIndex = bracket[index].teamIndex;
 
       // Clear 2 levels down and on since the winner changed
       for (let i = Math.floor(index / 4); i > 0; i = Math.floor(i / 2)) {
-        bracket[i] = {team: { name: '' }, wins: 0 };
+        bracket[i] = {teamIndex: -1, wins: 0 };
       }
     }
     this.setState(() => ({
@@ -157,7 +155,6 @@ class RadialBracketPage extends React.Component {
     this.setState(() => ({ name }));
   }
   onResetClick = () => {
-    console.log('called');
     const bracket = this.state.bracket;
     for (let i = 0; i < bracket.length / 2; i++) {
       bracket[i] = {team: { name: '' }, wins: 0 };
@@ -175,7 +172,7 @@ class RadialBracketPage extends React.Component {
   }
   onSubmit = () => {
     startSubmitBracket(this.state);
-    console.log('yay');
+    console.log('submitted');
   }
   onActiveTeamChange = (e) => {
     const activeTeamIndex = e.target.value;
@@ -191,6 +188,8 @@ class RadialBracketPage extends React.Component {
     
   }
   render() {
+    const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
+    console.log(`Submit is Disabled: ${isSubmitDisabled}`);
     return(
       <div className='RadialBracketPage'>
         <div className="RadialBracketPage__row">
@@ -217,6 +216,7 @@ class RadialBracketPage extends React.Component {
               onShowWinsClick={this.onShowWinsClick}
               onShowImagesClick={this.onShowImagesClick}
               onResetClick={this.onResetClick}
+              isSubmitDisabled={isSubmitDisabled}
               onSubmit={this.onSubmit}
             />
           </section>

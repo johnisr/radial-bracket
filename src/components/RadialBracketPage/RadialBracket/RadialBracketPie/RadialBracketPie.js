@@ -9,6 +9,7 @@ const RadialBracketPie = (props) => {
   const outer = props.outer;
   const inner = props.inner;
   const round = props.round;
+  const teams = props.data.teams;
   const dimensions = props.data.dimensions;
   const margin = props.data.margin;
   const showImages = props.data.showImages;
@@ -36,10 +37,10 @@ const RadialBracketPie = (props) => {
   // Functions to calculate SVGs -----------------------------------------
   // Path Functions
   const getPathColor = (d, i) => {
-    const team = d.data.team;
-      if (team.name === '') {
+      if (d.data.teamIndex === -1) {
         return i % 2 === 0 ? 'lightgray' : 'darkgray';
       }
+      const team = teams[d.data.teamIndex];
       return nbaColours[team.name][team.color].color;
   }
 
@@ -194,7 +195,7 @@ const RadialBracketPie = (props) => {
       // Text SVG
       const textTransform = getTextTransform(d, i, round);
       const textFontSize = getTextFontSize();
-  
+
       textSvg = (
         <text
           key={`text__${level}--${i}`}
@@ -205,7 +206,7 @@ const RadialBracketPie = (props) => {
           fontSize={textFontSize}
           fill={'white'}
         >
-          {d.data.team.name ? d.data.team.name : null }
+          {d.data.teamIndex !== -1 ? teams[d.data.teamIndex].name : null }
         </text>
       );
     }
@@ -214,7 +215,7 @@ const RadialBracketPie = (props) => {
     if (showImages) {
       // Image SVG
       const imageTransform = getImageTransform(d, i, round)
-      const imageLink = d.data.team.name !== '' ? nbaLogos[d.data.team.name][d.data.team.logo] : '#';
+      const imageLink = d.data.teamIndex !== -1 ? nbaLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo] : '#';
       imageSvg = (
         <image
           key={`image__${level}--${i}`}
@@ -262,7 +263,7 @@ const RadialBracketPie = (props) => {
             xlinkHref={winsTextPathLink}
             startOffset={winsTextPathOffset}
           >
-            {d.data.team.name !== '' ? d.data.wins : ''}
+            {d.data.teamIndex !== -1 ? d.data.wins : ''}
           </textPath>
         </text>
       );

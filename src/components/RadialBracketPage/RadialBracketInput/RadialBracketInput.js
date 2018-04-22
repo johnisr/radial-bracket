@@ -39,8 +39,8 @@ const RadialBracketInput = (props) => {
         <button
           type="button"
           onClick={props.onSubmit}
-          className="RadialBracketInput__button 
-            RadialBracketInput__button--primary"
+          disabled={props.isSubmitDisabled}
+          className="RadialBracketInput__button RadialBracketInput__button--primary"
         >
           Submit 
         </button>

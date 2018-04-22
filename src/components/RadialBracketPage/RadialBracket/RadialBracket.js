@@ -6,7 +6,6 @@ const RadialBracket = (props) => {
   // Props
   const svgDimensions = props.data.dimensions;
   const margin = props.data.margin;
-  const teams = props.data.teams;
   const bracket = props.data.bracket;
 
   // Derived From Props
