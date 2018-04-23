@@ -10,8 +10,6 @@ const RadialBracketFonts = (props) => {
     'Teams',
     'Wins',
   ];
-  console.log(textTypes);
-  console.log(fonts);
   return (
     <div className="RadialBracketFonts">
       {

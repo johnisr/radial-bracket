@@ -5,7 +5,7 @@ import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 import baseBracket from '../../data/baseBracket';
-import { startSubmitBracket } from '../../actions/bracket';
+import { startSubmitNBABracket } from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
 import './RadialBracketPage.css';
 
@@ -19,6 +19,8 @@ class RadialBracketPage extends React.Component {
     nameFontFamily: 0,
     textFontFamily: 0,
     winsTextFontFamily: 0,
+    fontFamilyChanged: 0,
+    colorChanged: 0,
     teams : [
       { name: "TOR", index: 0, full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
       { name: "WAS", index: 1, full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
@@ -44,31 +46,12 @@ class RadialBracketPage extends React.Component {
       name: '',
       index: 0,
       otherIndex: 0,
-      width: 0,
     },
     name: 'username',
     activeTeamIndex: -1,
     hasSubmitted: false,
   };
-  defaultOrder(west, east) {
-    const order = [east[0], east[7], east[3], east[4], east[2], east[5], east[1], east[6]];
-    return order.concat([west[0], west[7], west[3], west[4], west[2], west[5], west[1], west[6]]);
-  }
   componentDidMount() {
-    // let bracket = [];
-    // for (let i = 0; i < this.state.teams.length; i++) {
-    //   bracket.push({teamIndex: -1, wins: 0 });
-    // };
-    // const west = [];
-    // const east = [];
-    // this.state.teams.forEach(team => {
-    //   team.conference === 'East' ? east.push(team) : west.push(team)
-    // })
-    // east.sort((a, b) => a.place - b.place);
-    // west.sort((a, b) => a.place - b.place);
-    // this.defaultOrder(west,east).forEach(team => {
-    //   bracket.push({teamIndex: team.index, wins: 0 });
-    // })
     // Deep Copy Array using JSON methods
     const bracket = JSON.parse(JSON.stringify(baseBracket));
     this.setState(() => ({ bracket }));
@@ -123,13 +106,8 @@ class RadialBracketPage extends React.Component {
         name: this.state.teams[bracket[index].teamIndex].name,
         index,
         otherIndex,
-        width: this.state.dimensions[0],
       },
     }));
-
-    // bracket[index].wins = 4;
-    // bracket[Math.floor(index / 2)] = { team: bracket[index].team, wins: 0 };
-    // this.setState(() => ({ bracket }));
   }
   onModalClose = (e, index, otherIndex) => {
 
@@ -152,14 +130,9 @@ class RadialBracketPage extends React.Component {
         name: '',
         index: 0,
         otherIndex: 0,
-        width: 0,
       },
       bracket,
     }));
-  }
-  onFontFamilyChange = (e) => {
-    const fontFamily = e.target.value;
-    this.setState(() => ({ fontFamily }));
   }
   onNameChange = (e) => {
     const name = e.target.value;
@@ -167,13 +140,7 @@ class RadialBracketPage extends React.Component {
     this.setState(() => ({ name }));
   }
   onResetClick = () => {
-    const bracket = this.state.bracket;
-    for (let i = 0; i < bracket.length / 2; i++) {
-      bracket[i] = {team: { name: '' }, wins: 0 };
-    }
-    for (let i= bracket.length / 2; i < bracket.length; i++) {
-      bracket[i].wins = 0;
-    }
+    const bracket = JSON.parse(JSON.stringify(baseBracket));
     this.setState(() => ({ bracket }));
   };
   onShowWinsClick = () => {
@@ -184,7 +151,7 @@ class RadialBracketPage extends React.Component {
   }
   onSubmit = () => {
     if (!this.state.hasSubmitted) {
-      const hasSubmitted = startSubmitBracket(this.state);
+      const hasSubmitted = startSubmitNBABracket(this.state);
       this.setState(() => ({ hasSubmitted }));
     }
     saveSvgAsPng(document.getElementById('svg'), 'radialBracket.png');
@@ -194,23 +161,22 @@ class RadialBracketPage extends React.Component {
     this.setState(() => ({ activeTeamIndex }));
   }
   onColorChange = (colorIndex) => {
+    const colorChanged = this.state.colorChanged + 1;
     const teams = this.state.teams;
     const index = this.state.activeTeamIndex;
     teams[index].color = colorIndex;
-    this.setState(() => ({
-      teams
-    }));
-    
+    this.setState(() => ({ teams, colorChanged }));
   }
   onFontChange = (textType, index) => {
+    const fontFamilyChanged = this.state.fontFamilyChanged + 1;
     if (textType === 'Title') {
-      this.setState(() => ({ titleFontFamily: index }))
+      this.setState(() => ({ titleFontFamily: index, fontFamilyChanged }))
     } else if (textType === 'Name') {
-      this.setState(() => ({ nameFontFamily: index }))
+      this.setState(() => ({ nameFontFamily: index, fontFamilyChanged }))
     } else if (textType === 'Teams') {
-      this.setState(() => ({ textFontFamily: index }))
+      this.setState(() => ({ textFontFamily: index, fontFamilyChanged }))
     } else if (textType === 'Wins') {
-      this.setState(() => ({ winsTextFontFamily: index }))
+      this.setState(() => ({ winsTextFontFamily: index, fontFamilyChanged }))
     }
   }
   render() {
