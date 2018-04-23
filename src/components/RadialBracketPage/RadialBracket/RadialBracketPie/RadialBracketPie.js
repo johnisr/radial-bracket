@@ -64,7 +64,7 @@ const RadialBracketPie = (props) => {
         return i % 2 === 0 ? 'lightgray' : 'darkgray';
       }
       const team = teams[d.data.teamIndex];
-      return nbaColours[team.name][team.color].color;
+      return nbaColours[team.index][team.color].color;
   }
 
   const getPiePath = (d, i, round) => {

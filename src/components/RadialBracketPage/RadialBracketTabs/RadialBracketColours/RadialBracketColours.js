@@ -8,7 +8,7 @@ const RadialBracketColours = (props) => {
   const teams = props.teams;
   let colors = [];
   if (props.activeTeamIndex >= 0) {
-    colors = nbaColours[teams[props.activeTeamIndex].name];
+    colors = nbaColours[teams[props.activeTeamIndex].index];
   }
   
   return (

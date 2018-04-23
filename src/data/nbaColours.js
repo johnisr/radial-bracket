@@ -1,5 +1,5 @@
-export default {
-  TOR: [
+export default [
+  [ // TOR
     { name: 'Red', color: '#ce1141' },
     { name: 'Black', color: '#000000' },
     { name: 'Silver', color: '#A1A1A4' },
@@ -8,12 +8,12 @@ export default {
     { name: 'Retro Red', color: '#BA0C2F' },
     { name: 'Silver', color: '#8A8D8F' },
   ],
-  WAS: [
+  [ // WAS
     { name: 'Navy Blue', color: '#002B5C' },
     { name: 'Red', color: '#e31837' },
     { name: 'Silver', color: '#C4CED4' },
   ],
-  CLE: [
+  [ // CLE
     { name: 'Cavaliers Wine', color: '#6F263D' },
     { name: 'Cavaliers Navy', color: '#041E42' },
     { name: 'Cavaliers Yellow', color: '#FFB81C' },
@@ -25,12 +25,12 @@ export default {
     { name: 'Retro Navy Blue', color: '#04225C' },
     { name: 'White', color: '#FFFFFF' },
   ],
-  IND: [
+  [ // IND
     { name: 'Pacers Blue', color: '#002D62' },
     { name: 'Yellow', color: '#FDBB30' },
     { name: 'Silver', color: '#BEC0C2' },
   ],
-  PHI: [
+  [ // PHI
     { name: 'Blue', color: '#006bb6' },
     { name: 'Red', color: '#ed174c' },
     { name: 'Navy', color: '#002B5C' },
@@ -40,7 +40,7 @@ export default {
     { name: 'Gold', color: '#BB9754' },
     { name: 'Black', color: '#040204' },
   ],
-  MIA: [
+  [ // MIA
     { name: 'Red', color: '#98002E' },
     { name: 'Yellow', color: '#F9A01B' },
     { name: 'Black', color: '#000000' },
@@ -51,20 +51,20 @@ export default {
     { name: 'White', color: '#FFFFFF' },
 
   ],
-  BOS: [
+  [ // BOS
     { name: 'Celtics Green', color: '#007A33' },
     { name: 'Celtics Gold', color: '#BA9653' },
     { name: 'Celtics Brown', color: '#963821' },
     { name: 'Celtics Beige', color: '#E59E6D' },
     { name: 'Celtics Black', color: '#000000' },
   ],
-  MIL: [
+  [ // MIL
     { name: 'Good Land Green', color: '#00471B' },
     { name: 'Cream City Cream', color: '#EEE1C6' },
     { name: 'Great Lakes Blue', color: '#0077c0' },
     { name: 'Black', color: '#000000' },
   ],
-  SAS: [
+  [ // SAS
     { name: 'Silver', color: '#c4ced4' },
     { name: 'Black', color: '#000000' },
     { name: 'Retro Silver', color: '#8a8d8f' },
@@ -72,7 +72,7 @@ export default {
     { name: 'Blue', color: '#00B2A9' },
     { name: 'Orange', color: '#FF8200' },
   ],
-  GSW: [
+  [ // GSW
     { name: 'Warriors Royal Blue', color: '#006BB6' },
     { name: 'Golden Yellow', color: '#FDB927' },
     { name: 'Slate', color: '#26282A' },
@@ -83,16 +83,16 @@ export default {
     { name: 'Warriors Blue', color: '#002F6C' },
     { name: 'Warriors Yellow', color: '#85714D' },
   ],
-  NOP: [
+  [ // NOP
     { name: 'Pelicans Navy', color: '#0C2340' },
     { name: 'Pelicans Red', color: '#C8102E' },
     { name: 'Pelicans Gold', color: '#85714D' },
   ],
-  POR: [
+  [ // POR
     { name: 'Red', color: '#E03A3E' },
     { name: 'Black', color: '#000000' },
   ],
-  UTA: [
+  [ // UTA
     { name: 'Navy', color: '#002B5C' },
     { name: 'Green', color: '#00471B' },
     { name: 'Yellow', color: '#F9A01B' },
@@ -102,13 +102,13 @@ export default {
     { name: 'Green', color: '#006272' },
     { name: 'Copper', color: '#954E4C' },
   ],
-  OKC: [
+  [ // OKC
     { name: 'Thunder Blue', color: '#007ac1' },
     { name: 'Sunset', color: '#ef3b24' },
     { name: 'Blue', color: '#002D62' },
     { name: 'Yellow', color: '#fdbb30' },
   ],
-  MIN: [
+  [ // MIN
     { name: 'Midnight Blue', color: '#0C2340' },
     { name: 'Lake Blue', color: '#236192' },
     { name: 'Monlight Grey', color: '#9ea2a2' },
@@ -124,7 +124,7 @@ export default {
     { name: 'Silver', color: '#848A8C' },
     { name: 'White', color: '#FFFFFF' },
   ],
-  HOU: [
+  [ // HOU
     { name: 'Red', color: '#CE1141' },
     { name: 'Black', color: '#000000' },
     { name: 'Silver', color: '#C4CED4' },
@@ -135,4 +135,4 @@ export default {
     { name: 'Old Red', color: '#BA0C2F' },
     { name: 'Yellow', color: '#FFC72C' },
   ],
-};
+];
