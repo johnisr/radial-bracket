@@ -10,6 +10,11 @@ export const startSubmitNBABracket = async (state = {}) => {
     winsTextFontFamily =  0,
     fontFamilyChanged =  0,
     colorChanged =  0,
+    titleFontStyle = 2,
+    textFontStyle = 0,
+    winsFontStyle = 0,
+    fontStyleChanged = 0,
+    startTime = 0,
     teams = [],
     bracket = [],
     name = ''
@@ -27,12 +32,16 @@ export const startSubmitNBABracket = async (state = {}) => {
     winsTextFontFamily,
     fontFamilyChanged,
     colorChanged,
+    titleFontStyle,
+    textFontStyle,
+    winsFontStyle,
+    fontStyleChanged,
+    startTime,
   };
+
   try {
     await database.ref(`2018/nba`).push(data);
-    return true;
-  } catch (e) {
-    console.log(e);
-    return false;
+  } catch(e) {
+    throw Error(e);
   }
 };

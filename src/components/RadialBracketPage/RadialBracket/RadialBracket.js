@@ -1,6 +1,7 @@
 import React from 'react';
 import RadialBracketPie from './RadialBracketPie/RadialBracketPie';
 import fonts from '../../../data/fonts';
+import fontStyle from '../../../data/fontStyle';
 import './RadialBracket.css';
 
 const RadialBracket = (props) => {
@@ -13,8 +14,12 @@ const RadialBracket = (props) => {
   const width = svgDimensions[0] - margin.left - margin.right;
   const height = svgDimensions[1] - margin.top - margin.bottom;
 
-  const titleSize = width / 25; // 1.5em, 24px for 600px wide
-  const nameSize = width / 15; // 2.5em, 40px for 600px wide
+  let titleSize = width / 25; // 1.5em, 24px for 600px wide
+  let nameSize = width / 15; // 2.5em, 40px for 600px wide
+  if (props.data.titleFontStyle % 2 === 1) {
+    titleSize = width / 24; // 1.5em, 24px for 600px wide
+    nameSize = width / 14; // 2.5em, 40px for 600px wide
+  }
 
   // Settings (want to eventually base of Props)
   const titleShiftY = -40;
@@ -27,12 +32,19 @@ const RadialBracket = (props) => {
   const pieSize = [ 0 ];
 
   // Style
+  const titleFontStyle = fontStyle[props.data.titleFontStyle];
+  const fill = titleFontStyle.split(' ')[0];
+  const stroke = titleFontStyle.split(' ')[1];
   const titleStyle = {
     fontFamily: fonts[props.data.titleFontFamily],
+    fill,
+    stroke,
   };
   
   const nameStyle = {
     fontFamily: fonts[props.data.nameFontFamily],
+    fill,
+    stroke,
   };
 
   // Divides SVG into equal width pies

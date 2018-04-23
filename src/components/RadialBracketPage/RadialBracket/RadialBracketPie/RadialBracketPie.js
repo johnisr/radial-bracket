@@ -3,6 +3,7 @@ import { arc, pie } from 'd3-shape';
 import nbaColours from '../../../../data/nbaColours';
 import nbaLogos from '../../../../data/nbaLogos';
 import fonts from '../../../../data/fonts';
+import fontStyle from '../../../../data/fontStyle';
 import './RadialBracketPie.css';
 
 const RadialBracketPie = (props) => {
@@ -38,13 +39,22 @@ const RadialBracketPie = (props) => {
 
 
   // Styles For Text
-
+  const textFontStyle = fontStyle[props.data.textFontStyle];
+  const textFill = textFontStyle.split(' ')[0];
+  const textStroke = textFontStyle.split(' ')[1];
   const textStyle = {
     fontFamily: fonts[props.data.textFontFamily],
+    fill: textFill,
+    stroke: textStroke,
   };
   
+  const winsFontStyle = fontStyle[props.data.winsFontStyle];
+  const winsFill = winsFontStyle.split(' ')[0];
+  const winsStroke = winsFontStyle.split(' ')[1];
   const winsTextStyle = {
     fontFamily: fonts[props.data.winsTextFontFamily],
+    fill: winsFill,
+    stroke: winsStroke,
   };
 
   // Functions to calculate SVGs -----------------------------------------
@@ -284,7 +294,6 @@ const RadialBracketPie = (props) => {
           fontSize={winsTextFontSize}
           dy={winsTextShiftY}
           dx={winsTextShiftX}
-          fill={'white'}
         >
           <textPath
             href={winsTextPathLink}

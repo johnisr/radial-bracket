@@ -1,3 +1,10 @@
+.RadialBracketPie {
+
+  &__text {
+    user-select: none;
+  }
+}
+
 .winsPath {
   opacity: 0;
   visibility: hidden;

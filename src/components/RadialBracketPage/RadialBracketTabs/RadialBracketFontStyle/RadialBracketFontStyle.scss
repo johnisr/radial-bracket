@@ -1,10 +1,10 @@
 @import '../../../../styles/base';
 
-.RadialBracketFonts {
+.RadialBracketFontStyle {
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(4, minmax(6rem, 1fr));
+  grid-template-columns: repeat(3, minmax(6rem, 1fr));
   grid-gap: 2rem;
 
   &__section {
