@@ -4,10 +4,10 @@ import RadialBracketTabs from './RadialBracketTabs/RadialBracketTabs';
 import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
-import './RadialBracketPage.css';
 import baseBracket from '../../data/baseBracket';
 import { startSubmitBracket } from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
+import './RadialBracketPage.css';
 
 class RadialBracketPage extends React.Component {
   state = {
@@ -15,6 +15,10 @@ class RadialBracketPage extends React.Component {
     margin: { top: 70, right: 0, bottom: 0, left: 0 },
     showWins: false,
     showImages: false,
+    titleFontFamily: 0,
+    nameFontFamily: 0,
+    textFontFamily: 0,
+    winsTextFontFamily: 0,
     teams : [
       { name: "TOR", index: 0, full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
       { name: "WAS", index: 1, full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
@@ -42,7 +46,7 @@ class RadialBracketPage extends React.Component {
       otherIndex: 0,
       width: 0,
     },
-    name: '',
+    name: 'username',
     activeTeamIndex: -1,
     hasSubmitted: false,
   };
@@ -153,6 +157,10 @@ class RadialBracketPage extends React.Component {
       bracket,
     }));
   }
+  onFontFamilyChange = (e) => {
+    const fontFamily = e.target.value;
+    this.setState(() => ({ fontFamily }));
+  }
   onNameChange = (e) => {
     const name = e.target.value;
     if (name.length > 20) return;
@@ -194,6 +202,17 @@ class RadialBracketPage extends React.Component {
     }));
     
   }
+  onFontChange = (textType, index) => {
+    if (textType === 'Title') {
+      this.setState(() => ({ titleFontFamily: index }))
+    } else if (textType === 'Name') {
+      this.setState(() => ({ nameFontFamily: index }))
+    } else if (textType === 'Teams') {
+      this.setState(() => ({ textFontFamily: index }))
+    } else if (textType === 'Wins') {
+      this.setState(() => ({ winsTextFontFamily: index }))
+    }
+  }
   render() {
     const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
     return(
@@ -208,6 +227,8 @@ class RadialBracketPage extends React.Component {
               onActiveTeamChange={this.onActiveTeamChange}
               activeTeamIndex={this.state.activeTeamIndex}
               onColorChange={this.onColorChange}
+              onFontChange={this.onFontChange}
+              textFontFamily={this.state.textFontFamily}
             />
           </section>
           <section className="section__center-6-start-end">

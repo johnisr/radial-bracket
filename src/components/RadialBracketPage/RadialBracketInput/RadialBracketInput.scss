@@ -13,7 +13,7 @@
     background-color: $color-grey-dark-3;
     border-radius: .3rem;
 
-    margin: 0 1rem;
+    margin: 1rem;
 
     border: none;
     cursor: pointer;
@@ -78,6 +78,13 @@
         }
       }
     }
+  }
+
+  &__submitGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
   }
 
   &__input {

@@ -2,6 +2,7 @@ import React from 'react';
 import { arc, pie } from 'd3-shape';
 import nbaColours from '../../../../data/nbaColours';
 import nbaLogos from '../../../../data/nbaLogos';
+import fonts from '../../../../data/fonts';
 import './RadialBracketPie.css';
 
 const RadialBracketPie = (props) => {
@@ -34,6 +35,17 @@ const RadialBracketPie = (props) => {
   const centerImageShiftY = width / 24;
   const imageHeight = level !== 0 ? outer - inner - imageMargin : (outer - inner) * centerImageMultiplier;
   const imageWidth = level !== 0 ? outer - inner - imageMargin : (outer - inner) * centerImageMultiplier;
+
+
+  // Styles For Text
+
+  const textStyle = {
+    fontFamily: fonts[props.data.textFontFamily],
+  };
+  
+  const winsTextStyle = {
+    fontFamily: fonts[props.data.winsTextFontFamily],
+  };
 
   // Functions to calculate SVGs -----------------------------------------
   // Path Functions
@@ -84,8 +96,17 @@ const RadialBracketPie = (props) => {
   const getPathId = (d, i) => (
     `winsPath__${level}--${i}`
   );
-  const getWinsPath = (d) => {
-    if (level < 3) return path;
+  const getWinsPath = (d, i) => {
+    if (level === 1) {
+      if (i === 0) return 'M 0,100   l 100,0 z';
+      if (i === 1) return 'M -25,100 l 100,0 z';
+    }
+    if (level === 2) {
+      if (i === 0) return 'M 130,-5 l 100,0 z';
+      if (i === 1) return 'M 130,35 l 100,0 z';
+      if (i === 2) return 'M-153,35 l 100,0 z';
+      if (i === 3) return 'M-153,-5 l 100,0 z';
+    } 
     const firstArcRegex = /(^.+?)L/;
     let newArc = firstArcRegex.exec(path(d))[1];
     newArc = newArc.replace(/,/g, ' ');
@@ -120,17 +141,17 @@ const RadialBracketPie = (props) => {
   );
 
   const getWinsTextShiftY = (d, i) => {
-    if (level === 0) return; // don't display this
+    // if (level === 0) return; // don't display this
     if (level === 1) {
-      return `${outer - inner + 45}`;
+      return 0;
+      // return `${outer - inner -200}`;
     }
     if (level === 2) {
-      if (i === 0 || i === 3) {
-        return `${outer - inner - 60}`;
+      if (i % 2 === 0) {
+        return 0;
       }
-      if (i === 1 || i === 2) {
-        return `${outer - inner - 15}`;
-      }
+      return 0;
+      // return `${outer - inner}`;
     }
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (angle > 90 && angle < 270) {
@@ -139,31 +160,32 @@ const RadialBracketPie = (props) => {
     return `${outer - inner - 15}`;
   };
   const getWinsTextShiftX = (d, i) => {
-    if (level === 1) {
-      return i === 1 ? '-25' : '1';
-    }
-    if (level === 2) {
-      if (i === 0 || i === 1) {
-        return width / 4 - 25;
-      } else {
-        return -width / 4;
-      }
-    }
+    // if (level === 1) {
+    //   return i === 1 ? '-1' : '';
+    // }
+    // if (level === 2) {
+    //   if (i === 0 || i === 1) {
+    //     return width / 2 - 20;
+    //   } 
+    //   else {
+    //     return -width / 4;
+    //   }
+    // }
     return null;
   };
 
-  const getWinsTextPathLink = (d, i) => (
-    `#winsPath__${level}--${i}`
-  );
+  const getWinsTextPathLink = (d, i) => {
+    return `#winsPath__${level}--${i}`
+  };
 
   const getwinsTextPathOffset = (d, i) => {
     if (level === 1) {
-      return '20%';
+      return null;
     }
-    let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (level === 2) {
       return null;
     }
+    let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (angle > 90 && angle < 270) {
       return i % 2 === 0 ? `1%` : `${80 + 7 * (4-level)}%`;
     } 
@@ -210,6 +232,7 @@ const RadialBracketPie = (props) => {
           textAnchor={'middle'}
           fontSize={textFontSize}
           fill={'white'}
+          style={textStyle}
         >
           {d.data.teamIndex !== -1 ? teams[d.data.teamIndex].name : null }
         </text>
@@ -217,11 +240,10 @@ const RadialBracketPie = (props) => {
     }
 
     let imageSvg = null;
-    if (showImages) {
+    if (showImages && d.data.teamIndex !== -1) {
       // Image SVG
       const imageTransform = getImageTransform(d, i, round)
-      const imageLink = d.data.teamIndex !== -1 ? nbaLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo] : '#';
-      console.log(imageLink);
+      const imageLink = nbaLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo];
       imageSvg = (
         <image
           key={`image__${level}--${i}`}
@@ -239,7 +261,7 @@ const RadialBracketPie = (props) => {
     let winsTextSvg = null;
     if (showWins && level !== 0) {
       const winsPathId = getPathId(d, i);
-      const winsPath = getWinsPath(d);
+      const winsPath = getWinsPath(d, i);
       winsSvg = (
         <path
           key={`winsPath__${level}--${i}`}
@@ -265,8 +287,9 @@ const RadialBracketPie = (props) => {
           fill={'white'}
         >
           <textPath
-            xlinkHref={winsTextPathLink}
+            href={winsTextPathLink}
             startOffset={winsTextPathOffset}
+            style={winsTextStyle}
           >
             {d.data.teamIndex !== -1 ? d.data.wins : ''}
           </textPath>

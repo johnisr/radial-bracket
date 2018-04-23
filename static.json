@@ -4,10 +4,6 @@
   "headers": {
     "/**": {
       "Strict-Transport-Security": "max-age=7776000"
-    },
-    "/static/media/**": {
-      "Accept": "image/webp,image/apng,image/*,image/svg+xml,*/*;q=0.8",
-      "Accept-Encoding": "gzip, deflate, br"
     }
   }
 }

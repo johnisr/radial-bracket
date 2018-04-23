@@ -1,5 +1,6 @@
 import React from 'react';
 import nbaColours from '../../../../data/nbaColours';
+import fonts from '../../../../data/fonts';
 import './RadialBracketColours.css';
 
 const RadialBracketColours = (props) => {
@@ -30,7 +31,10 @@ const RadialBracketColours = (props) => {
         colors.map((color, i) => (
           <div
             key={`${color.color}--${i}`}
-            style={{ backgroundColor: `${color.color}` }}
+            style={{
+              backgroundColor: `${color.color}`,
+              fontFamily: fonts[props.textFontFamily],
+            }}
             onClick={() => props.onColorChange(i)}
             value={i}
             className="RadialBracketColours__colours"

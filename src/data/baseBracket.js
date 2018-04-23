@@ -100,14 +100,14 @@ export default [
   },
   {
     "teamIndex": 1,
-    "wins": 1
+    "wins": 2
   },
 
   // CLE vs IND
 
   {
     "teamIndex": 2,
-    "wins": 1
+    "wins": 2
   },
   {
     "teamIndex": 3,

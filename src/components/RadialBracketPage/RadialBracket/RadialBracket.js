@@ -1,5 +1,6 @@
 import React from 'react';
 import RadialBracketPie from './RadialBracketPie/RadialBracketPie';
+import fonts from '../../../data/fonts';
 import './RadialBracket.css';
 
 const RadialBracket = (props) => {
@@ -12,18 +13,27 @@ const RadialBracket = (props) => {
   const width = svgDimensions[0] - margin.left - margin.right;
   const height = svgDimensions[1] - margin.top - margin.bottom;
 
-  const preTitleSize = width / 25; // 1.5em, 24px for 600px wide
-  const titleSize = width / 15; // 2.5em, 40px for 600px wide
+  const titleSize = width / 25; // 1.5em, 24px for 600px wide
+  const nameSize = width / 15; // 2.5em, 40px for 600px wide
 
   // Settings (want to eventually base of Props)
-  const preTitleShiftY = -40;
-  const titleShiftY = 0;
+  const titleShiftY = -40;
+  const nameShiftY = 0;
   const titleText = 'NBA 2018 Playoff Predictions';
   const chartLevelMargins = 5;
   const chartPadding = 10;
 
   const base = width / 2 - chartPadding;
   const pieSize = [ 0 ];
+
+  // Style
+  const titleStyle = {
+    fontFamily: fonts[props.data.titleFontFamily],
+  };
+  
+  const nameStyle = {
+    fontFamily: fonts[props.data.nameFontFamily],
+  };
 
   // Divides SVG into equal width pies
   for (let i = 0; i < Math.log2(bracket.length); i++) {
@@ -62,18 +72,20 @@ const RadialBracket = (props) => {
           <text
             className="pie__pre-title"
             x={width / 2}
-            y={preTitleShiftY}
+            y={titleShiftY}
             textAnchor={'middle'}
-            fontSize={preTitleSize}
+            fontSize={titleSize}
+            style={titleStyle}
           >
             {titleText}
           </text>
           <text
             className="pie__title"
             x={width / 2}
-            y={titleShiftY}
-            fontSize={titleSize}
+            y={nameShiftY}
+            fontSize={nameSize}
             textAnchor={'middle'}
+            style={nameStyle}
           >
             {props.data.name}
           </text>

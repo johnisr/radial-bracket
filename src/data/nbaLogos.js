@@ -1,4 +1,4 @@
-import torLogo from './logo/tor_logo.png';
+import torLogo from './logo/tor_logo.svg';
 import wasLogo from './logo/was_logo.svg';
 import cleLogo from './logo/cle_logo.svg';
 import indLogo from './logo/ind_logo.svg';
