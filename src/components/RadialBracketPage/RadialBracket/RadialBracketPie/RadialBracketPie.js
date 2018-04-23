@@ -15,6 +15,7 @@ const RadialBracketPie = (props) => {
   const showImages = props.data.showImages;
   const showWins = props.data.showWins;
 
+
   // Derived From Props
   const level = Math.log2(round.length);
   const width = dimensions[0] - margin.left - margin.right;
@@ -26,7 +27,7 @@ const RadialBracketPie = (props) => {
 
   //Text Settings
   const textY = '.37em';
-
+  
   // Image Settings
   const imageMargin = 10;
   const centerImageMultiplier = 1.5;
@@ -168,9 +169,15 @@ const RadialBracketPie = (props) => {
     } 
     return i % 2 === 0 ? `${80 + 7 * (4-level)}%` : `1%`;
   };
-
   //Data Setup
-  const arcs = pie().value(1)(round);
+  let arcs = pie().value(1)(round);
+  // Chrome does not have a stable sort, so giving value all equal to 1 will mean
+  // order teams appear will change. To ensure they stay the same between browsers
+  // teams variable must be in order of appearance and index must match
+  if (round.length === teams.length) {
+    arcs = pie().value(1).sort((a, b) => a.teamIndex - b.teamIndex)(round);
+  }
+
   const path = arc().outerRadius(outer).innerRadius(inner);
 
   const bracketPie = arcs.map((d, i, round) => {
@@ -214,6 +221,7 @@ const RadialBracketPie = (props) => {
       // Image SVG
       const imageTransform = getImageTransform(d, i, round)
       const imageLink = d.data.teamIndex !== -1 ? nbaLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo] : '#';
+      console.log(imageLink);
       imageSvg = (
         <image
           key={`image__${level}--${i}`}

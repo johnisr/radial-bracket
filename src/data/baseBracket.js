@@ -82,7 +82,7 @@ export default [
   // NOP vs [GSW, SAS], TOP LEFT
 
   {
-    "teamIndex": 10,
+    "teamIndex": 13,
     "wins": 0
   },
   {
@@ -133,7 +133,7 @@ export default [
   },
   {
     "teamIndex": 7,
-    "wins": 1
+    "wins": 2
   },
 
   // ------------ WEST QUARTERFINALS ----------------------
@@ -141,44 +141,44 @@ export default [
   // HOU vs MIN
 
   {
-    "teamIndex": 15,
+    "teamIndex": 8,
     "wins": 2
   },
   {
-    "teamIndex": 14,
+    "teamIndex": 9,
     "wins": 1
   },
 
   // OKC vs UTA
 
   {
-    "teamIndex": 13,
+    "teamIndex": 10,
     "wins": 1
   },
   {
-    "teamIndex": 12,
+    "teamIndex": 11,
     "wins": 2
   },
 
   // POR vs NOP
 
   {
-    "teamIndex": 11,
+    "teamIndex": 12,
     "wins": 0
   },
   {
-    "teamIndex": 10,
+    "teamIndex": 13,
     "wins": 4
   },
 
   // GSW vs SAS
 
   {
-    "teamIndex": 9,
+    "teamIndex": 14,
     "wins": 3
   },
   {
-    "teamIndex": 8,
-    "wins": 0
+    "teamIndex": 15,
+    "wins": 1
   }
 ]
