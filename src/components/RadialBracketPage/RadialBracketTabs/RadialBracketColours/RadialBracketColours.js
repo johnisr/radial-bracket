@@ -1,14 +1,19 @@
 import React from 'react';
 import nbaColours from '../../../../data/nbaColours';
+import nbaNames from '../../../../data/nbaNames';
 import fonts from '../../../../data/fonts';
 import './RadialBracketColours.css';
 
 const RadialBracketColours = (props) => {
 
   const teams = props.teams;
+  console.log(teams);
   let colors = [];
-  if (props.activeTeamIndex >= 0) {
-    colors = nbaColours[teams[props.activeTeamIndex].index];
+  let name = '';
+  const team = props.activeTeamIndex >= 0 ? teams[props.activeTeamIndex] : null;
+  if (team) {
+    colors = nbaColours[team.index];
+    name = nbaNames[team.index][team.name];
   }
   
   return (
@@ -22,7 +27,7 @@ const RadialBracketColours = (props) => {
         {
           teams.map((team, i) => (
             <option key={i} value={i}>
-              {team.name}
+              {nbaNames[team.index][team.name]}
             </option>
           ))
         }
@@ -40,7 +45,7 @@ const RadialBracketColours = (props) => {
             className="RadialBracketColours__colours"
           >
             <p className="RadialBracketColours__text">
-              {teams[props.activeTeamIndex].name}
+              {name}
             </p>
           </div>
         ))

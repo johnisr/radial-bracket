@@ -1,0 +1,18 @@
+export default [
+  [ "TOR" ],
+  [ "WAS" ], 
+  [ "CLE" ], 
+  [ "IND" ], 
+  [ "PHI" ], 
+  [ "MIA" ], 
+  [ "BOS" ], 
+  [ "MIL" ], 
+  [ "HOU" ], 
+  [ "MIN" ], 
+  [ "OKC" ],
+  [ "UTA" ], 
+  [ "POR" ], 
+  [ "NOP" ],
+  [ "GSW" ],
+  [ "SAS" ],
+];

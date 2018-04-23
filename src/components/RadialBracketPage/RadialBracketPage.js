@@ -5,7 +5,9 @@ import RadialBracketTabs from './RadialBracketTabs/RadialBracketTabs';
 import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
+import baseTeams from '../../data/baseTeams';
 import baseBracket from '../../data/baseBracket';
+import nbaNames from '../../data/nbaNames';
 import { startSubmitNBABracket } from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
 import './RadialBracketPage.css';
@@ -27,24 +29,7 @@ class RadialBracketPage extends React.Component {
     winsFontStyle: 0,
     fontStyleChanged: 0,
     startTime: moment().valueOf(),
-    teams : [
-      { name: "TOR", index: 0, full: 'Toronto Raptors', color: 0, logo: 0, place: 1, conference: 'East' },
-      { name: "WAS", index: 1, full: 'Washington Wizards', color: 0, logo: 0, place: 8, conference: 'East' },
-      { name: "CLE", index: 2, full: 'Cleveland Cavaliers', color: 0, logo: 0, place: 4, conference: 'East' },
-      { name: "IND", index: 3, full: 'Indiana Pacers', color: 0, logo: 0, place: 5, conference: 'East' },
-      { name: "PHI", index: 4, full: 'Philadelphia 76ers', color: 0, logo: 0, place: 3, conference: 'East' },
-      { name: "MIA", index: 5, full: 'Miami Heat', color: 0, logo: 0, place: 6, conference: 'East' },
-      { name: "BOS", index: 6, full: 'Boston Celtics', color: 0, logo: 0, place: 2, conference: 'East' },
-      { name: "MIL", index: 7, full: 'Milwaukee Bucks', color: 0, logo: 0, place: 7, conference: 'East' },
-      { name: "HOU", index: 8, full: 'Houston Rockets', color: 0, logo: 0, place: 1, conference: 'West' },
-      { name: "MIN", index: 9, full: 'Minnesota Timberwolves', color: 0, logo: 0, place: 8, conference: 'West' },
-      { name: "OKC", index: 10, full: 'Oklahoma City Thunder', color: 0, logo: 0, place: 4, conference: 'West' },
-      { name: "UTA", index: 11, full: 'Utah Jazz', color: 0, logo: 0, place: 5, conference: 'West' },
-      { name: "POR", index: 12, full: 'Portland Trailblazers', color: 0, logo: 0, place: 3, conference: 'West' },
-      { name: "NOP", index: 13, full: 'New Orleans Pelicans', color: 0, logo: 0, place: 6, conference: 'West' },
-      { name: "GSW", index: 14, full: 'Golden State Warriors', color: 0, logo: 0, place: 2, conference: 'West' },
-      { name: "SAS", index: 15, full: 'San Antonio Spurs', color: 0, logo: 0, place: 7, conference: 'West' },
-    ],
+    teams : [],
     bracket: [],
     modal: {
       x: 0,
@@ -60,7 +45,15 @@ class RadialBracketPage extends React.Component {
   componentDidMount() {
     // Deep Copy Array using JSON methods
     const bracket = JSON.parse(JSON.stringify(baseBracket));
-    this.setState(() => ({ bracket }));
+    
+    let teams = [];
+    baseTeams.forEach(temp => {
+      const { full, place, conference, name, ...team } = temp;
+      team.bracketIndex = team.index;
+      team.name = 0; 
+      teams.push(team);
+    });
+    this.setState(() => ({ bracket, teams }));
   }
   onSvgClick = (e, d, level) => {
     const index = Math.pow(2, level) + d.index;
@@ -105,11 +98,14 @@ class RadialBracketPage extends React.Component {
     const x = e.clientX;
     const y =  e.clientY;
 
+    const team = this.state.teams[bracket[index].teamIndex];
+    const name = nbaNames[team.index][team.name];
+
     this.setState(() => ({
       modal: {
         x,
         y,
-        name: this.state.teams[bracket[index].teamIndex].name,
+        name,
         index,
         otherIndex,
       },

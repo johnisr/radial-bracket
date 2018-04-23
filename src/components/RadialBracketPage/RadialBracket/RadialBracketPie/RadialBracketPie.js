@@ -2,6 +2,7 @@ import React from 'react';
 import { arc, pie } from 'd3-shape';
 import nbaColours from '../../../../data/nbaColours';
 import nbaLogos from '../../../../data/nbaLogos';
+import nbaNames from '../../../../data/nbaNames';
 import fonts from '../../../../data/fonts';
 import fontStyle from '../../../../data/fontStyle';
 import './RadialBracketPie.css';
@@ -233,6 +234,8 @@ const RadialBracketPie = (props) => {
       // Text SVG
       const textTransform = getTextTransform(d, i, round);
       const textFontSize = getTextFontSize();
+      const team = d.data.teamIndex !== -1 ? teams[d.data.teamIndex] : null;
+      const name = team !== null ? nbaNames[team.index][team.name] : null;
 
       textSvg = (
         <text
@@ -245,7 +248,7 @@ const RadialBracketPie = (props) => {
           fill={'white'}
           style={textStyle}
         >
-          {d.data.teamIndex !== -1 ? teams[d.data.teamIndex].name : null }
+          { name }
         </text>
       );
     }

@@ -7,6 +7,7 @@ const RadialBracketModal = (props) => {
   const { x, y, name, index, otherIndex } = props.data;
   const isVisible = x !== 0 && y !== 0 ? true : false;
 
+  console.log(x, y, name, index, otherIndex);
   const customStyles = {
     content : {
       top: `50%`,
