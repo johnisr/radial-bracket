@@ -12,6 +12,9 @@
 # css
 src/**/*.css
 
+#
+src/playground
+
 # misc
 .DS_Store
 .env.local

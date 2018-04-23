@@ -14,17 +14,17 @@ const RadialBracket = (props) => {
   const width = svgDimensions[0] - margin.left - margin.right;
   const height = svgDimensions[1] - margin.top - margin.bottom;
 
-  let titleSize = width / 25; // 1.5em, 24px for 600px wide
-  let nameSize = width / 15; // 2.5em, 40px for 600px wide
+  let titleSize = width / 20; // 1.5em, 24px for 600px wide
+  let nameSize = width / 12; // 2.5em, 40px for 600px wide
   if (props.data.titleFontStyle % 2 === 1) {
-    titleSize = width / 24; // 1.5em, 24px for 600px wide
-    nameSize = width / 14; // 2.5em, 40px for 600px wide
+    titleSize = width / 19; // 1.5em, 24px for 600px wide
+    nameSize = width / 11; // 2.5em, 40px for 600px wide
   }
 
   // Settings (want to eventually base of Props)
-  const titleShiftY = -40;
+  const titleShiftY = -50;
   const nameShiftY = 0;
-  const titleText = 'NBA 2018 Playoff Predictions';
+  const titleText = 'NBA 2018 Playoffs';
   const chartLevelMargins = 5;
   const chartPadding = 10;
 
@@ -82,7 +82,7 @@ const RadialBracket = (props) => {
           transform={`translate(${margin.left}, ${margin.top})`}
         >
           <text
-            className="pie__pre-title"
+            className="RadialBracket__text"
             x={width / 2}
             y={titleShiftY}
             textAnchor={'middle'}
@@ -92,7 +92,7 @@ const RadialBracket = (props) => {
             {titleText}
           </text>
           <text
-            className="pie__title"
+            className="RadialBracket__text"
             x={width / 2}
             y={nameShiftY}
             fontSize={nameSize}

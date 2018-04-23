@@ -12,9 +12,9 @@ import './RadialBracketPage.css';
 
 class RadialBracketPage extends React.Component {
   state = {
-    dimensions: [600, 670],
-    margin: { top: 70, right: 0, bottom: 0, left: 0 },
-    showWins: false,
+    dimensions: [600, 700],
+    margin: { top: 100, right: 0, bottom: 0, left: 0 },
+    showWins: true,
     showImages: false,
     titleFontFamily: 0,
     nameFontFamily: 0,
@@ -162,7 +162,7 @@ class RadialBracketPage extends React.Component {
         const hasSubmitted = true;
         this.setState(() => ({ hasSubmitted }));
       } catch (e) {
-        //
+        console.log(e);
       }
     }
     saveSvgAsPng(document.getElementById('svg'), 'radialBracket.png');

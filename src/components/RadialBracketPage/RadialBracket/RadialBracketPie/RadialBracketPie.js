@@ -201,6 +201,7 @@ const RadialBracketPie = (props) => {
     } 
     return i % 2 === 0 ? `${80 + 7 * (4-level)}%` : `1%`;
   };
+  
   //Data Setup
   let arcs = pie().value(1)(round);
   // Chrome does not have a stable sort, so giving value all equal to 1 will mean
