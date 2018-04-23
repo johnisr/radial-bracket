@@ -45,5 +45,9 @@
       background-color: lighten($color-grey-dark-3, 10%);
       box-shadow: 0 .5rem 1rem rgba(0,0,0,0.2);
     }
+
+    & > * {
+      user-select: none;
+    }
   }
 }
