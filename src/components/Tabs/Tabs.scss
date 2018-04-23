@@ -13,10 +13,6 @@
   cursor: pointer;
   font-family: $font-display;
   
-  & > * {
-    user-select: none;
-  }
-  
   &:hover {
     background-color: $color-grey-light-2;
     

@@ -7,9 +7,15 @@ import RadialBracketFontStyle from './RadialBracketFontStyle/RadialBracketFontSt
 const RadialBracketTabs = (props) => (
   <Tabs>
     <TabList>
-      <Tab>Colors</Tab>
-      <Tab>Fonts</Tab>
-      <Tab>Font Style</Tab>
+      <Tab>
+        <p className="RadialBracketTabs__text">Colors</p>
+      </Tab>
+      <Tab>
+        <p className="RadialBracketTabs__text">Fonts</p>
+      </Tab>
+      <Tab>
+        <p className="RadialBracketTabs__text">Font Style</p>
+      </Tab>
     </TabList>
 
     <TabPanels>

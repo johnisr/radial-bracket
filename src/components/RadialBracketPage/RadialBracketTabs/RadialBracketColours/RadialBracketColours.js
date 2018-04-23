@@ -39,7 +39,9 @@ const RadialBracketColours = (props) => {
             value={i}
             className="RadialBracketColours__colours"
           >
-            {teams[props.activeTeamIndex].name}
+            <p className="RadialBracketColours__text">
+              {teams[props.activeTeamIndex].name}
+            </p>
           </div>
         ))
       }

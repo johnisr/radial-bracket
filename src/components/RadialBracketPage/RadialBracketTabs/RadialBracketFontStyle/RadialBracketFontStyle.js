@@ -17,7 +17,7 @@ const RadialBracketFontStyle = (props) => {
             key={`${textType}`}
             className="RadialBracketFontStyle__section"
           >
-            {textType}
+            <p className="RadialBracketFontStyle__text">{textType}</p>
             <div className="RadialBracketFontStyle__options">
               {
                 fontStyles.map((fontStyle, i) => (
@@ -35,9 +35,18 @@ const RadialBracketFontStyle = (props) => {
                     }}
                     onClick={() => props.onFontStyleChange(textType, i)}
                   >
-                    {textType === 'Wins' && i }
-                    {textType === 'Teams' && 'TEAM' }
-                    {textType === 'Title' && 'Title'}
+                    {
+                      textType === 'Wins' && 
+                      <p className="RadialBracketFontStyle__text">{i}</p>
+                    }
+                    {
+                      textType === 'Teams' && 
+                      <p className="RadialBracketFontStyle__text">TEAM</p>
+                    }
+                    {
+                      textType === 'Title' && 
+                      <p className="RadialBracketFontStyle__text">Title</p>
+                    }
                   </div>
                 ))
               }

@@ -11,6 +11,10 @@
     font-size: $font-size-tertiary;
     text-align: center;
   }
+
+  &__text {
+    user-select: none;
+  }
   
   &__options {
     display: grid;
