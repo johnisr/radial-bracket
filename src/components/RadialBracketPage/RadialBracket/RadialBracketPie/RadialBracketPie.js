@@ -109,8 +109,8 @@ const RadialBracketPie = (props) => {
   );
   const getWinsPath = (d, i) => {
     if (level === 1) {
-      if (i === 0) return 'M 0,100   l 100,0 z';
-      if (i === 1) return 'M -25,100 l 100,0 z';
+      if (i === 0) return 'M 3,100   l 100,0 z';
+      if (i === 1) return 'M -28,100 l 100,0 z';
     }
     if (level === 2) {
       if (i === 0) return 'M 130,-5 l 100,0 z';
@@ -198,9 +198,9 @@ const RadialBracketPie = (props) => {
     }
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (angle > 90 && angle < 270) {
-      return i % 2 === 0 ? `1%` : `${80 + 7 * (4-level)}%`;
+      return i % 2 === 0 ? `4%` : `${77 + 7 * (4-level)}%`;
     } 
-    return i % 2 === 0 ? `${80 + 7 * (4-level)}%` : `1%`;
+    return i % 2 === 0 ? `${77 + 7 * (4-level)}%` : `4%`;
   };
   
   //Data Setup
