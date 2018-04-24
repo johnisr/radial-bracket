@@ -51,6 +51,8 @@ class RadialBracketPage extends React.Component {
     name: 'username',
     activeTeamIndex: -1,
     hasSubmitted: false,
+    svgBackgroundColor: '',
+    backgroundColorChanged: 0,
   };
   componentDidMount() {
     // Deep Copy Array using JSON methods
@@ -205,6 +207,11 @@ class RadialBracketPage extends React.Component {
       this.setState(() => ({ winsFontStyle: index, fontStyleChanged }))
     }
   }
+  onBackgroundColorChange = (e) => {
+    const svgBackgroundColor = e.target.value;
+    const backgroundColorChanged = this.state.backgroundColorChanged + 1;
+    this.setState(() => ({ backgroundColorChanged, svgBackgroundColor }));
+  }
   render() {
     const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
     return(
@@ -226,6 +233,8 @@ class RadialBracketPage extends React.Component {
               onFontChange={this.onFontChange}
               onFontStyleChange={this.onFontStyleChange}
               textFontFamily={this.state.textFontFamily}
+              svgBackgroundColor={this.state.svgBackgroundColor}
+              onBackgroundColorChange={this.onBackgroundColorChange}
             />
           </section>
           <section className="section__center-6-start-end">
@@ -250,6 +259,7 @@ class RadialBracketPage extends React.Component {
               titleFontFamily={this.state.titleFontFamily}
               nameFontFamily={this.state.nameFontFamily}
               name={this.state.name}
+              svgBackgroundColor={this.state.svgBackgroundColor}
             />
           </section>
           <section className="section__center-6-start-end">

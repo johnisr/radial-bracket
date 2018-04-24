@@ -142,7 +142,7 @@ export default [
 
   {
     "teamIndex": 8,
-    "wins": 2
+    "wins": 3
   },
   {
     "teamIndex": 9,
@@ -157,7 +157,7 @@ export default [
   },
   {
     "teamIndex": 11,
-    "wins": 2
+    "wins": 3
   },
 
   // POR vs NOP

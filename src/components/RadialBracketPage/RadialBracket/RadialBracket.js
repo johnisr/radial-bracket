@@ -63,6 +63,11 @@ const RadialBracket = (props) => {
     stroke,
   };
 
+  const backgroundColor = props.svgBackgroundColor;
+  const backgroundStyle = {
+    backgroundColor,
+  };
+
   // Divides SVG into equal width pies
   for (let i = 0; i < Math.log2(bracket.length); i++) {
     pieSize.push(base / Math.log2(bracket.length) * (i + 1));
@@ -105,6 +110,7 @@ const RadialBracket = (props) => {
         viewBox={`0 0 ${svgDimensions[0]} ${svgDimensions[1]}`}
         preserveAspectRatio={'xMidYMid meet'}
         id="svg"
+        style={backgroundStyle}
       >
         <g
           className="origin"
