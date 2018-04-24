@@ -17,7 +17,7 @@ const RadialBracketBackground = (props) => {
         <button
           type="button"
           className="RadialBracketBackground__button"
-          value={'#FFF'}
+          value={'#FFFFFF'}
           onClick={props.onBackgroundColorChange}
         >
           White
@@ -25,14 +25,14 @@ const RadialBracketBackground = (props) => {
         <button
           type="button"
           className="RadialBracketBackground__button"
-          value={'#000'}
+          value={'#000000'}
           onClick={props.onBackgroundColorChange}
         >
           Black
         </button>
       </div>
       <div className="RadialBracketBackground__colorgroup">
-        <label for="color" className="RadialBracketBackground__text">
+        <label htmlFor="color" className="RadialBracketBackground__text">
           Custom
         </label>
         <input

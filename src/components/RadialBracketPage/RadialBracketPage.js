@@ -172,7 +172,7 @@ class RadialBracketPage extends React.Component {
         console.log(e);
       }
     }
-    saveSvgAsPng(document.getElementById('svg'), 'radialBracket.png');
+    saveSvgAsPng(document.getElementById('svg'), 'radialBracket.png', { encoderOptions: 1 });
   }
   onActiveTeamChange = (e) => {
     const activeTeamIndex = e.target.value;

@@ -17,7 +17,9 @@ export const startSubmitNBABracket = async (state = {}) => {
     startTime = 0,
     teams = [],
     bracket = [],
-    name = ''
+    name = '',
+    svgBackgroundColor = '',
+    backgroundColorChanged = 0,
   } = state;
   const createdAt = moment().valueOf();
   const data = {
@@ -37,8 +39,9 @@ export const startSubmitNBABracket = async (state = {}) => {
     winsFontStyle,
     fontStyleChanged,
     startTime,
+    svgBackgroundColor,
+    backgroundColorChanged,
   };
-  console.log(data);
 
   try {
     await database.ref(`2018/nba`).push(data);
