@@ -38,6 +38,7 @@ export const startSubmitNBABracket = async (state = {}) => {
     fontStyleChanged,
     startTime,
   };
+  console.log(data);
 
   try {
     await database.ref(`2018/nba`).push(data);

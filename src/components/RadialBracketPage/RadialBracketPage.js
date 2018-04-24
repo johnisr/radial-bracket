@@ -1,13 +1,23 @@
 import React from 'react';
 import moment from 'moment';
+
+// Components
 import Header from '../Header/Header';
 import RadialBracketTabs from './RadialBracketTabs/RadialBracketTabs';
 import RadialBracket from './RadialBracket/RadialBracket';
 import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
+
+// Data
 import baseTeams from '../../data/baseTeams';
 import baseBracket from '../../data/baseBracket';
 import nbaNames from '../../data/nbaNames';
+import fonts from '../../data/fonts';
+import fontStyle from '../../data/fontStyle';
+import nbaColours from '../../data/nbaColours';
+import nbaLogos from '../../data/nbaLogos';
+
+// Actions
 import { startSubmitNBABracket } from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
 import './RadialBracketPage.css';
@@ -35,7 +45,7 @@ class RadialBracketPage extends React.Component {
       x: 0,
       y: 0,
       name: '',
-      index: 0,
+      currentIndex: 0,
       otherIndex: 0,
     },
     name: 'username',
@@ -49,56 +59,55 @@ class RadialBracketPage extends React.Component {
     let teams = [];
     baseTeams.forEach(temp => {
       const { full, place, conference, name, ...team } = temp;
-      team.bracketIndex = team.index;
       team.name = 0; 
       teams.push(team);
     });
     this.setState(() => ({ bracket, teams }));
   }
   onSvgClick = (e, d, level) => {
-    const index = Math.pow(2, level) + d.index;
-    if (index < 2) {
+    const currentIndex = Math.pow(2, level) + d.index;
+    if (currentIndex < 2) {
       console.log('can not select for winner');
       return;
     }
 
     const bracket = this.state.bracket;
-    if (bracket[index].teamIndex === -1) {
+    if (bracket[currentIndex].teamIndex === -1) {
       console.log('current team not set');
       return;
     }
 
-    if(baseBracket[index].wins === 4) {
-      const teamIndex = baseBracket[index].teamIndex;
-      console.log(`${this.state.teams[teamIndex].name} has already won`);
+    if(baseBracket[currentIndex].wins === 4) {
+      const index = baseBracket[currentIndex].teamIndex;
+      console.log(`${this.state.teams[index].name} has already won`);
       return;
     }
 
     let otherIndex;
-    if (index % 2 === 0) {
-      if (bracket[index + 1].teamIndex === -1) {
+    if (currentIndex % 2 === 0) {
+      if (bracket[currentIndex + 1].teamIndex === -1) {
         console.log('other team not set');
         return;
       }
-      otherIndex = index + 1;
+      otherIndex = currentIndex + 1;
     } else {
-      if (bracket[index - 1].teamIndex === -1) {
+      if (bracket[currentIndex - 1].teamIndex === -1) {
         console.log('other team not set');
         return;
       }
-      otherIndex = index - 1;
+      otherIndex = currentIndex - 1;
     }
 
     if(baseBracket[otherIndex].wins === 4) {
-      const teamIndex = baseBracket[otherIndex].teamIndex;
-      console.log(`${this.state.teams[teamIndex].name} has already won`);
+      const index = baseBracket[otherIndex].teamIndex;
+      console.log(`${this.state.teams[index].name} has already won`);
       return;
     }
 
     const x = e.clientX;
     const y =  e.clientY;
 
-    const team = this.state.teams[bracket[index].teamIndex];
+    const team = this.state.teams[bracket[currentIndex].teamIndex];
     const name = nbaNames[team.index][team.name];
 
     this.setState(() => ({
@@ -106,22 +115,22 @@ class RadialBracketPage extends React.Component {
         x,
         y,
         name,
-        index,
+        currentIndex,
         otherIndex,
       },
     }));
   }
-  onModalClose = (e, index, otherIndex) => {
+  onModalClose = (e, currentIndex, otherIndex) => {
 
     const bracket = this.state.bracket;
-    if (e !== undefined && index !== undefined && otherIndex !== undefined) {
+    if (e !== undefined && currentIndex !== undefined && otherIndex !== undefined) {
       const value = e.target.value;
-      bracket[index].wins = 4;
+      bracket[currentIndex].wins = 4;
       bracket[otherIndex].wins = value - 4;
-      bracket[Math.floor(index / 2)].teamIndex = bracket[index].teamIndex;
+      bracket[Math.floor(currentIndex / 2)].teamIndex = bracket[currentIndex].teamIndex;
 
       // Clear 2 levels down and on since the winner changed
-      for (let i = Math.floor(index / 4); i > 0; i = Math.floor(i / 2)) {
+      for (let i = Math.floor(currentIndex / 4); i > 0; i = Math.floor(i / 2)) {
         bracket[i] = {teamIndex: -1, wins: 0 };
       }
     }
@@ -130,7 +139,7 @@ class RadialBracketPage extends React.Component {
         x: 0,
         y: 0,
         name: '',
-        index: 0,
+        currentIndex: 0,
         otherIndex: 0,
       },
       bracket,
@@ -206,6 +215,10 @@ class RadialBracketPage extends React.Component {
           </section>
           <section className="section__center-start-end">
             <RadialBracketTabs
+              nbaNames={nbaNames}
+              nbaColours={nbaColours}
+              fonts={fonts}
+              fontStyle={fontStyle}
               teams={this.state.teams}
               onActiveTeamChange={this.onActiveTeamChange}
               activeTeamIndex={this.state.activeTeamIndex}
@@ -216,7 +229,28 @@ class RadialBracketPage extends React.Component {
             />
           </section>
           <section className="section__center-6-start-end">
-            <RadialBracket data={this.state} onClick={this.onSvgClick} />
+            <RadialBracket
+              onClick={this.onSvgClick}
+              fonts={fonts}
+              fontStyle={fontStyle}
+              nbaColours={nbaColours}
+              nbaLogos={nbaLogos}
+              nbaNames={nbaNames}
+              teams={this.state.teams}
+              showWins={this.state.showWins}
+              showImages={this.state.showImages}
+              textFontStyle={this.state.textFontStyle}
+              winsFontStyle={this.state.winsFontStyle}
+              textFontFamily={this.state.textFontFamily}
+              winsTextFontFamily={this.state.winsTextFontFamily}
+              dimensions={this.state.dimensions}
+              margin={this.state.margin}
+              bracket={this.state.bracket}
+              titleFontStyle={this.state.titleFontStyle}
+              titleFontFamily={this.state.titleFontFamily}
+              nameFontFamily={this.state.nameFontFamily}
+              name={this.state.name}
+            />
           </section>
           <section className="section__center-6-start-end">
             <RadialBracketInput
@@ -231,7 +265,11 @@ class RadialBracketPage extends React.Component {
               onSubmit={this.onSubmit}
             />
           </section>
-          <RadialBracketModal data={this.state.modal} onModalClose={this.onModalClose}/>
+          <RadialBracketModal
+            modal={this.state.modal}
+            onModalClose={this.onModalClose}
+            baseBracket={baseBracket}
+          />
         </div>
       </div>
     );

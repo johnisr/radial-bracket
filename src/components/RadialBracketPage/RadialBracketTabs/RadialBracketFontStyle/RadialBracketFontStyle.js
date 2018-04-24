@@ -1,9 +1,9 @@
 import React from 'react';
-import fontStyles from '../../../../data/fontStyle';
 import './RadialBracketFontStyle.css';
 
 const RadialBracketFontStyle = (props) => {
 
+  const fontStyles = props.fontStyle;
   const textTypes = [
     'Title',
     'Teams',

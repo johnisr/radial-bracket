@@ -1,22 +1,27 @@
 import React from 'react';
 import { arc, pie } from 'd3-shape';
-import nbaColours from '../../../../data/nbaColours';
-import nbaLogos from '../../../../data/nbaLogos';
-import nbaNames from '../../../../data/nbaNames';
-import fonts from '../../../../data/fonts';
-import fontStyle from '../../../../data/fontStyle';
 import './RadialBracketPie.css';
 
 const RadialBracketPie = (props) => {
+
+  // External data props
+  const nbaColours = props.nbaColours;
+  const nbaLogos = props.nbaLogos;
+  const nbaNames = props.nbaNames;
+  const fonts = props.fonts;
+  const fontStyle = props.fontStyle;
+  
   // Props
   const outer = props.outer;
   const inner = props.inner;
   const round = props.round;
-  const teams = props.data.teams;
-  const dimensions = props.data.dimensions;
-  const margin = props.data.margin;
-  const showImages = props.data.showImages;
-  const showWins = props.data.showWins;
+
+  // Pass along props 
+  const teams = props.teams;
+  const dimensions = props.dimensions;
+  const margin = props.margin;
+  const showImages = props.showImages;
+  const showWins = props.showWins;
 
 
   // Derived From Props
@@ -38,22 +43,21 @@ const RadialBracketPie = (props) => {
   const imageHeight = level !== 0 ? outer - inner - imageMargin : (outer - inner) * centerImageMultiplier;
   const imageWidth = level !== 0 ? outer - inner - imageMargin : (outer - inner) * centerImageMultiplier;
 
-
   // Styles For Text
-  const textFontStyle = fontStyle[props.data.textFontStyle];
+  const textFontStyle = fontStyle[props.textFontStyle];
   const textFill = textFontStyle.split(' ')[0];
   const textStroke = textFontStyle.split(' ')[1];
   const textStyle = {
-    fontFamily: fonts[props.data.textFontFamily],
+    fontFamily: fonts[props.textFontFamily],
     fill: textFill,
     stroke: textStroke,
   };
   
-  const winsFontStyle = fontStyle[props.data.winsFontStyle];
+  const winsFontStyle = fontStyle[props.winsFontStyle];
   const winsFill = winsFontStyle.split(' ')[0];
   const winsStroke = winsFontStyle.split(' ')[1];
   const winsTextStyle = {
-    fontFamily: fonts[props.data.winsTextFontFamily],
+    fontFamily: fonts[props.winsTextFontFamily],
     fill: winsFill,
     stroke: winsStroke,
   };
@@ -198,9 +202,9 @@ const RadialBracketPie = (props) => {
     }
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
     if (angle > 90 && angle < 270) {
-      return i % 2 === 0 ? `4%` : `${77 + 7 * (4-level)}%`;
+      return i % 2 === 0 ? `3%` : `${78 + 7 * (4-level)}%`;
     } 
-    return i % 2 === 0 ? `${77 + 7 * (4-level)}%` : `4%`;
+    return i % 2 === 0 ? `${78 + 7 * (4-level)}%` : `3%`;
   };
   
   //Data Setup

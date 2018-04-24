@@ -3,6 +3,7 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from '../../Tabs/Tabs';
 import RadialBracketColours from './RadialBracketColours/RadialBracketColours';
 import RadialBracketFonts from './RadialBracketFonts/RadialBracketFonts';
 import RadialBracketFontStyle from './RadialBracketFontStyle/RadialBracketFontStyle';
+import './RadialBracketTabs.css';
 
 const RadialBracketTabs = (props) => (
   <Tabs>
@@ -26,16 +27,21 @@ const RadialBracketTabs = (props) => (
           activeTeamIndex={props.activeTeamIndex}
           onColorChange={props.onColorChange}
           textFontFamily={props.textFontFamily}
+          nbaNames={props.nbaNames}
+          nbaColours={props.nbaColours}
+          fonts={props.fonts}
         />
       </TabPanel>
       <TabPanel>
         <RadialBracketFonts
           onFontChange={props.onFontChange}
+          fonts={props.fonts}
         />
       </TabPanel>
       <TabPanel>
         <RadialBracketFontStyle
           onFontStyleChange={props.onFontStyleChange}
+          fontStyle={props.fontStyle}
         />
       </TabPanel>
     </TabPanels>

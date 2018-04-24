@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto;
-  height: auto;
+  max-width: 600px;
+  max-height: 700px;
   margin-bottom: 2rem;
+  margin: 0 auto;
 
   &__svg {
     width: 100%;

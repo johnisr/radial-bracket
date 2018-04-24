@@ -1,14 +1,31 @@
 import React from 'react';
 import RadialBracketPie from './RadialBracketPie/RadialBracketPie';
-import fonts from '../../../data/fonts';
-import fontStyle from '../../../data/fontStyle';
 import './RadialBracket.css';
 
 const RadialBracket = (props) => {
+  // External Data Props
+  const nbaColours = props.nbaColours;
+  const nbaLogos = props.nbaLogos;
+  const nbaNames = props.nbaNames;
+  const fonts = props.fonts;
+  const fontStyle = props.fontStyle;
+
+  // Passing Along and not doing anything
+  const teams = props.teams;
+  const showWins = props.showWins;
+  const showImages = props.showImages;
+  const textFontStyle = props.textFontStyle;
+  const winsFontStyle = props.winsFontStyle;
+  const textFontFamily = props.textFontFamily;
+  const winsTextFontFamily = props.winsTextFontFamily;
+  
   // Props
-  const svgDimensions = props.data.dimensions;
-  const margin = props.data.margin;
-  const bracket = props.data.bracket;
+  const svgDimensions = props.dimensions;
+  const margin = props.margin;
+  const bracket = props.bracket;
+  const titleFontStyle = props.titleFontStyle;
+  const titleFontFamily = props.titleFontFamily;
+  const nameFontFamily = props.nameFontFamily;
 
   // Derived From Props
   const width = svgDimensions[0] - margin.left - margin.right;
@@ -16,7 +33,7 @@ const RadialBracket = (props) => {
 
   let titleSize = width / 20; // 1.5em, 24px for 600px wide
   let nameSize = width / 12; // 2.5em, 40px for 600px wide
-  if (props.data.titleFontStyle % 2 === 1) {
+  if (titleFontStyle % 2 === 1) {
     titleSize = width / 19; // 1.5em, 24px for 600px wide
     nameSize = width / 11; // 2.5em, 40px for 600px wide
   }
@@ -32,17 +49,16 @@ const RadialBracket = (props) => {
   const pieSize = [ 0 ];
 
   // Style
-  const titleFontStyle = fontStyle[props.data.titleFontStyle];
-  const fill = titleFontStyle.split(' ')[0];
-  const stroke = titleFontStyle.split(' ')[1];
+  const fill = fontStyle[titleFontStyle].split(' ')[0];
+  const stroke = fontStyle[titleFontStyle].split(' ')[1];
   const titleStyle = {
-    fontFamily: fonts[props.data.titleFontFamily],
+    fontFamily: fonts[titleFontFamily],
     fill,
     stroke,
   };
   
   const nameStyle = {
-    fontFamily: fonts[props.data.nameFontFamily],
+    fontFamily: fonts[nameFontFamily],
     fill,
     stroke,
   };
@@ -61,8 +77,21 @@ const RadialBracket = (props) => {
         outer={pieSize[i+1] - chartLevelMargins}
         inner={pieSize[i]}
         round={bracket.slice(Math.pow(2, i), Math.pow(2, i+1))} 
-        data={props.data}
         onClick={props.onClick}
+        nbaColours={nbaColours}
+        nbaLogos={nbaLogos}
+        nbaNames={nbaNames}
+        fonts={fonts}
+        fontStyle={fontStyle}
+        teams={teams}
+        dimensions={svgDimensions}
+        margin={margin}
+        showWins={showWins}
+        showImages={showImages}
+        textFontStyle={textFontStyle}
+        winsFontStyle={winsFontStyle}
+        textFontFamily={textFontFamily}
+        winsTextFontFamily={winsTextFontFamily}
       />)
   };
 
@@ -99,7 +128,7 @@ const RadialBracket = (props) => {
             textAnchor={'middle'}
             style={nameStyle}
           >
-            {props.data.name}
+            {props.name}
           </text>
           <g
             className="chart"
