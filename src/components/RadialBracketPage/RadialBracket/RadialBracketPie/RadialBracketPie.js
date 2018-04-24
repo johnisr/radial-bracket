@@ -66,7 +66,7 @@ const RadialBracketPie = (props) => {
   // Path Functions
   const getPathColor = (d, i) => {
       if (d.data.teamIndex === -1) {
-        return i % 2 === 0 ? 'lightgray' : 'darkgray';
+        return i % 2 === 0 ? '#999999' : '#B2B2B2';
       }
       const team = teams[d.data.teamIndex];
       return nbaColours[team.index][team.color].color;
