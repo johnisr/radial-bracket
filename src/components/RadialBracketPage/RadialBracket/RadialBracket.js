@@ -4,9 +4,9 @@ import './RadialBracket.css';
 
 const RadialBracket = (props) => {
   // External Data Props
-  const nbaColours = props.nbaColours;
-  const nbaLogos = props.nbaLogos;
-  const nbaNames = props.nbaNames;
+  const teamColours = props.teamColours;
+  const teamLogos = props.teamLogos;
+  const teamNames = props.teamNames;
   const fonts = props.fonts;
   const fontStyle = props.fontStyle;
 
@@ -41,7 +41,7 @@ const RadialBracket = (props) => {
   // Settings (want to eventually base of Props)
   const titleShiftY = -50;
   const nameShiftY = 0;
-  const titleText = 'NBA 2018 Playoffs';
+  const titleText = props.titleText;
   const chartLevelMargins = 5;
   const chartPadding = 10;
 
@@ -83,9 +83,9 @@ const RadialBracket = (props) => {
         inner={pieSize[i]}
         round={bracket.slice(Math.pow(2, i), Math.pow(2, i+1))} 
         onClick={props.onClick}
-        nbaColours={nbaColours}
-        nbaLogos={nbaLogos}
-        nbaNames={nbaNames}
+        teamColours={teamColours}
+        teamLogos={teamLogos}
+        teamNames={teamNames}
         fonts={fonts}
         fontStyle={fontStyle}
         teams={teams}

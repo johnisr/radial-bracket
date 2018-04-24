@@ -10,4 +10,34 @@
     margin: 0 2rem;
   }
 
+  &__btn {
+    &,
+    &:link,
+    &:visited {
+      font-size: $font-size-quarternary;
+      color: $color-grey-light-2;
+      background-color: $color-grey-dark-3;
+  
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      
+      padding: 0 2rem;
+  
+      display: flex;
+      align-items: center;
+    }
+  
+    &:hover {
+      background-color: lighten($color-grey-dark-3, 20%);
+    }
+  
+    &:active,
+    &:focus,
+    &--active {
+      outline: none;
+      background-color: lighten($color-grey-dark-3, 10%);
+    }
+  }
+
 }

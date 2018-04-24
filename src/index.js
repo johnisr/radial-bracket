@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux';
 // import RadialBracketContainer from './playground/RadialBracketContainer';
-import RadialBracketInfo from './playground/RadialBracketInfo';
+// import RadialBracketInfo from './playground/RadialBracketInfo';
 
 import configureStore from './store/configureStore';
 

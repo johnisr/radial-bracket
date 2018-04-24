@@ -5,9 +5,9 @@ import './RadialBracketPie.css';
 const RadialBracketPie = (props) => {
 
   // External data props
-  const nbaColours = props.nbaColours;
-  const nbaLogos = props.nbaLogos;
-  const nbaNames = props.nbaNames;
+  const teamColours = props.teamColours;
+  const teamLogos = props.teamLogos;
+  const teamNames = props.teamNames;
   const fonts = props.fonts;
   const fontStyle = props.fontStyle;
   
@@ -69,7 +69,7 @@ const RadialBracketPie = (props) => {
         return i % 2 === 0 ? '#999999' : '#B2B2B2';
       }
       const team = teams[d.data.teamIndex];
-      return nbaColours[team.index][team.color].color;
+      return teamColours[team.index][team.color].color;
   }
 
   const getPiePath = (d, i, round) => {
@@ -239,7 +239,7 @@ const RadialBracketPie = (props) => {
       const textTransform = getTextTransform(d, i, round);
       const textFontSize = getTextFontSize();
       const team = d.data.teamIndex !== -1 ? teams[d.data.teamIndex] : null;
-      const name = team !== null ? nbaNames[team.index][team.name] : null;
+      const name = team !== null ? teamNames[team.index][team.name] : null;
 
       textSvg = (
         <text
@@ -261,7 +261,7 @@ const RadialBracketPie = (props) => {
     if (showImages && d.data.teamIndex !== -1) {
       // Image SVG
       const imageTransform = getImageTransform(d, i, round)
-      const imageLink = nbaLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo];
+      const imageLink = teamLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo];
       imageSvg = (
         <image
           key={`image__${level}--${i}`}

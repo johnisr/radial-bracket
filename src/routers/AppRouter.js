@@ -1,14 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import RadialBracketPage from '../components/RadialBracketPage/RadialBracketPage';
+import NBARadialBracketPage from '../components/NBARadialBracketPage/NBARadialBracketPage';
+import NHLRadialBracketPage from '../components/NHLRadialBracketPage/NHLRadialBracketPage';
 import NotFoundPage from '../components/NotFoundPage';
 
 const AppRouter = () => (
   <Router>
     <div>
       <Switch> 
-        <Route exact path="/" component={RadialBracketPage} />
+        <Route exact path="/" component={NBARadialBracketPage} />
+        <Route exact path="/nba" component={NBARadialBracketPage} />
+        <Route exact path="/nhl" component={NHLRadialBracketPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

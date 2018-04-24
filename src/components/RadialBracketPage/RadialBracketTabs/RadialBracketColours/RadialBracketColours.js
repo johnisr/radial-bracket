@@ -3,16 +3,16 @@ import './RadialBracketColours.css';
 
 const RadialBracketColours = (props) => {
 
-  const nbaColours = props.nbaColours;
+  const teamColours = props.teamColours;
   const fonts = props.fonts;
-  const nbaNames = props.nbaNames;
+  const teamNames = props.teamNames;
   const teams = props.teams;
   let colors = [];
   let name = '';
   const team = props.activeTeamIndex >= 0 ? teams[props.activeTeamIndex] : null;
   if (team) {
-    colors = nbaColours[team.index];
-    name = nbaNames[team.index][team.name];
+    colors = teamColours[team.index];
+    name = teamNames[team.index][team.name];
   }
   
   return (
@@ -26,7 +26,7 @@ const RadialBracketColours = (props) => {
         {
           teams.map((team, i) => (
             <option key={i} value={i}>
-              {nbaNames[team.index][team.name]}
+              {teamNames[team.index][team.name]}
             </option>
           ))
         }
