@@ -10,8 +10,8 @@ const AppRouter = () => (
     <div>
       <Switch> 
         <Route exact path="/" component={NBARadialBracketPage} />
-        <Route exact path="/nba" component={NBARadialBracketPage} />
-        <Route exact path="/nhl" component={NHLRadialBracketPage} />
+        <Route path="/nba" component={NBARadialBracketPage} />
+        <Route path="/nhl" component={NHLRadialBracketPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

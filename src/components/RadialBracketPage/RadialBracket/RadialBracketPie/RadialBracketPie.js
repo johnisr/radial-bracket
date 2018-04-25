@@ -150,10 +150,13 @@ const RadialBracketPie = (props) => {
     return newArc;
   };
 
-  // winsText Functions
-  const getWinsTextFontSize = (level) => (
-    width / 18.75 + (3 * (5 - level))
-  );
+  // winsText Functions 
+  const getWinsTextFontSize = (level) => {
+    if (level === 4) {
+      return width / 25;
+    } 
+    return width / 18.75 + (3 * (5 - level)) // 32px if width = 18.75
+  }
 
   const getWinsTextShiftY = (d, i) => {
     // if (level === 0) return; // don't display this
@@ -169,6 +172,13 @@ const RadialBracketPie = (props) => {
       // return `${outer - inner}`;
     }
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
+    if (level === 4) {
+      if (angle > 90 && angle < 270) {
+        return `-${outer - inner - 35}`;
+      }
+      return `${outer - inner - 18}`;
+    }
+    
     if (angle > 90 && angle < 270) {
       return `-${outer - inner - 40}`;
     }
@@ -201,6 +211,12 @@ const RadialBracketPie = (props) => {
       return null;
     }
     let angle = ((d.startAngle + d.endAngle) / 2) * 180 / Math.PI;
+    if (level === 4) {
+      if (angle > 90 && angle < 270) {
+        return i % 2 === 0 ? `3%` : `${85 + 7 * (4-level)}%`;
+      } 
+      return i % 2 === 0 ? `${85 + 7 * (4-level)}%` : `3%`;
+    }
     if (angle > 90 && angle < 270) {
       return i % 2 === 0 ? `3%` : `${78 + 7 * (4-level)}%`;
     } 
