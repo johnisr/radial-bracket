@@ -20,13 +20,13 @@ const RadialBracketInput = (props) => {
         >
           {props.showWins ? 'Hide Wins' : 'Show Wins'} 
         </button>
-        {/* <button
+        <button
           type="button"
           onClick={props.onShowImagesClick}
           className="RadialBracketInput__button"
         >
           {props.showImages ? 'Show Text' : 'Show Logos'} 
-        </button> */}
+        </button>
       </div>
       <div className="RadialBracketInput__submitGroup">
         <input 

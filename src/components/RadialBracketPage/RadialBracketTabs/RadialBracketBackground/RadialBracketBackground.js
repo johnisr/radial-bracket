@@ -5,7 +5,7 @@ const RadialBracketBackground = (props) => {
 
   return (
     <div className="RadialBracketBackground">
-      <div>
+      <div className="RadialBracketBackground__leftGroup">
         <button
           type="button"
           className="RadialBracketBackground__button"
@@ -22,26 +22,28 @@ const RadialBracketBackground = (props) => {
         >
           White
         </button>
+      </div>
+      <div className="RadialBracketBackground__rightGroup">
         <button
           type="button"
-          className="RadialBracketBackground__button"
+          className="RadialBracketBackground__button RadialBracketBackground__button--right"
           value={'#000000'}
           onClick={props.onBackgroundColorChange}
         >
           Black
         </button>
-      </div>
-      <div className="RadialBracketBackground__colorgroup">
-        <label htmlFor="color" className="RadialBracketBackground__text">
-          Custom
-        </label>
-        <input
-          className="RadialBracketBackground__color"
-          name="color"
-          type="color"
-          value={props.svgBackgroundColor}
-          onChange={props.onBackgroundColorChange}
-        />
+        <div className="RadialBracketBackground__colorgroup">
+          <label htmlFor="color" className="RadialBracketBackground__text">
+            Custom
+          </label>
+          <input
+            className="RadialBracketBackground__color"
+            name="color"
+            type="color"
+            value={props.svgBackgroundColor}
+            onChange={props.onBackgroundColorChange}
+          />
+        </div>
       </div>
     </div>
   );

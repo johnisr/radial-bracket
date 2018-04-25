@@ -14,7 +14,34 @@ const RadialBracketColours = (props) => {
     colors = teamColours[team.index];
     name = teamNames[team.index][team.name];
   }
-  
+ 
+  // Create an object that is alphabetically sorted and knows how it was sorted before
+  // thus can show sorted but return proper index as value
+  const sortedTeamNames = [];
+  if (teams.length !== 0) {
+    teamNames.forEach((team , i) => {
+      sortedTeamNames.push( { name: team[teams[i].name], index: i });
+    });
+    sortedTeamNames.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (b.name < a.name) return 1;
+    });
+  }
+
+  const fontStyle = props.fontStyle[props.textFontStyle];
+  console.log(props.fontStyle);
+  console.log(props.textFontStyle);
+  const font = {
+    fontFamily: fonts[props.textFontFamily],
+    color: fontStyle.split(' ')[0],
+    textShadow: `
+      -1px -1px 0 ${fontStyle.split(' ')[1]},
+      1px -1px 0 ${fontStyle.split(' ')[1]},
+      -1px 1px 0 ${fontStyle.split(' ')[1]},
+      1px 1px 0 ${fontStyle.split(' ')[1]}
+      `
+  };
+
   return (
     <div className="RadialBracketColours">
       <select 
@@ -24,9 +51,9 @@ const RadialBracketColours = (props) => {
       >
           <option key={'zero'} value={-1}>Select Team to Edit</option>
         {
-          teams.map((team, i) => (
-            <option key={i} value={i}>
-              {teamNames[team.index][team.name]}
+          sortedTeamNames.map((teamObj, i) => (
+            <option key={i} value={teamObj.index}>
+              {teamObj.name}
             </option>
           ))
         }
@@ -37,13 +64,12 @@ const RadialBracketColours = (props) => {
             key={`${color.color}--${i}`}
             style={{
               backgroundColor: `${color.color}`,
-              fontFamily: fonts[props.textFontFamily],
             }}
             onClick={() => props.onColorChange(i)}
             value={i}
             className="RadialBracketColours__colours"
           >
-            <p className="RadialBracketColours__text">
+            <p className="RadialBracketColours__text" style={font}>
               {name}
             </p>
           </div>

@@ -36,6 +36,14 @@ $font-size-quarternary: $font-size-body * 1.18; //13px
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px
+
+  @media only screen and (max-width: 34.5em) { // ~550px
+    font-size: 56.25%; // 9px/16px = 56.25 -> 1rem = 9px
+  }
+
+  @media only screen and (max-width: 23.25em) { // ~370px
+    font-size: 50%; // 8px/16px = 50 -> 1rem = 8px
+  }
 }
 
 body {
@@ -52,6 +60,10 @@ body {
 
   &__center-start-end {
     grid-column: center-start / center-end;
+
+    @media only screen and (max-width: 53.25em) { // ~850px
+      grid-column: full-start / full-end;
+    }
   }
 
   &__center-6-start-end {

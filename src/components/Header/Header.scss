@@ -6,8 +6,13 @@
   display: flex;
   
   &__title {
+    font-size: $font-size-primary;
     color: $color-grey-light-1;
     margin: 0 2rem;
+
+    @media only screen and (max-width: 30em) {
+      font-size: $font-size-tertiary;
+    }
   }
 
   &__btn {

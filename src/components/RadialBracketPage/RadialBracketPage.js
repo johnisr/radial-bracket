@@ -15,7 +15,7 @@ class RadialBracketPage extends React.Component {
     dimensions: [600, 700],
     margin: { top: 100, right: 0, bottom: 0, left: 0 },
     showWins: false,
-    showImages: false,
+    showImages: true,
     titleFontFamily: 0,
     nameFontFamily: 0,
     textFontFamily: 0,
@@ -211,6 +211,7 @@ class RadialBracketPage extends React.Component {
           teamColours={this.props.teamColours}
           fonts={this.props.fonts}
           fontStyle={this.props.fontStyle}
+          textFontStyle={this.state.textFontStyle}
           teams={this.state.teams}
           onActiveTeamChange={this.onActiveTeamChange}
           activeTeamIndex={this.state.activeTeamIndex}

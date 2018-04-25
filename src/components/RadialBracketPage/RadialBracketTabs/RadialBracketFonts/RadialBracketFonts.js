@@ -4,7 +4,6 @@ import './RadialBracketFonts.css';
 const RadialBracketFonts = (props) => {
 
   const fonts = props.fonts;
-  console.log(fonts[3]);
   const textTypes = [
     'Title',
     'Name',

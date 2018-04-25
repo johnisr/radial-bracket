@@ -34,6 +34,8 @@ const RadialBracketTabs = (props) => (
           teamNames={props.teamNames}
           teamColours={props.teamColours}
           fonts={props.fonts}
+          fontStyle={props.fontStyle}
+          textFontStyle={props.textFontStyle}
         />
       </TabPanel>
       <TabPanel>

@@ -1,6 +1,7 @@
 export default [
   [ // TBL
     { name: 'Blue', color: '#002868' },
+    { name: 'Silver Star', color: '#C1C7C7'},
     { name: 'Black', color: '#000000' },
     { name: 'White', color: '#FFFFFF' },
   ],

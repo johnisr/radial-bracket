@@ -58,7 +58,7 @@ export default [
   // [MIL, BOS] vs [MIA, PHI]
 
   {
-    "teamIndex": -1,
+    "teamIndex": 4,
     "wins": 0
   },
   {
@@ -86,7 +86,7 @@ export default [
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 14,
     "wins": 0
   },
 
@@ -118,7 +118,7 @@ export default [
 
   {
     "teamIndex": 4,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 5,
@@ -129,7 +129,7 @@ export default [
 
   {
     "teamIndex": 6,
-    "wins": 2
+    "wins": 3
   },
   {
     "teamIndex": 7,
@@ -175,7 +175,7 @@ export default [
 
   {
     "teamIndex": 14,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 15,

@@ -1,8 +1,9 @@
 @import '../../../styles/base';
 
 .RadialBracketInput {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(36rem, 1fr));
+  justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
 
@@ -86,6 +87,18 @@
     flex-wrap: wrap;
     justify-content: flex-end;
 
+    @media only screen and (max-width: 46.25em) { //740 px
+      justify-content: center;
+    }
+
+  }
+
+  &__toggleGroup {
+
+    @media only screen and (max-width: 46.25em) { //740 px
+      display: flex;
+      justify-content: center;
+    }
   }
 
   &__input {

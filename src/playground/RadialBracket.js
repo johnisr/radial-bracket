@@ -5,12 +5,12 @@ import RadialBracketPie from './RadialBracketPie';
 class RadialBracket extends React.Component {
 
   render() {
-    const dimensions = this.props.data.dimensions;
-    const margin = this.props.data.margin;
-    const showWins = this.props.data.showWins;
-    const showImages = this.props.data.showImages;
-    const teams = this.props.data.teams;
-    const bracket = this.props.data.bracket;
+    const dimensions = this.props.dimensions;
+    const margin = this.props.margin;
+    const showWins = this.props.showWins;
+    const showImages = this.props.showImages;
+    const teams = this.props.teams;
+    const bracket = this.props.bracket;
     
     // DERIVED STATE
     const width = dimensions[0] - margin.left - margin.right;
@@ -54,8 +54,7 @@ class RadialBracket extends React.Component {
         <RadialBracketPie 
           outer={pieSize[i+1] - chartLevelMargins}
           inner={pieSize[i]}
-          round={bracket.slice(Math.pow(2, i), Math.pow(2, i+1))} 
-          data={this.props.data}
+          round={bracket.slice(Math.pow(2, i), Math.pow(2, i+1))}
           onClick={this.props.onClick}
         />)
     };

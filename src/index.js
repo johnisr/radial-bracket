@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import 'typeface-bangers';
+import 'typeface-baloo';
+import 'typeface-roboto';
+import 'typeface-satisfy';
+import 'typeface-slabo-27px';
 
 import { Provider } from 'react-redux';
 // import RadialBracketContainer from './playground/RadialBracketContainer';

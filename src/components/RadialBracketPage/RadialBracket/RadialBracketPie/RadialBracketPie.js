@@ -260,8 +260,9 @@ const RadialBracketPie = (props) => {
     let imageSvg = null;
     if (showImages && d.data.teamIndex !== -1) {
       // Image SVG
-      const imageTransform = getImageTransform(d, i, round)
-      const imageLink = teamLogos[teams[d.data.teamIndex].name][teams[d.data.teamIndex].logo];
+      const imageTransform = getImageTransform(d, i, round);
+      const team = teams[d.data.teamIndex];
+      const imageLink = teamLogos[team.index][team.logo];
       imageSvg = (
         <image
           key={`image__${level}--${i}`}

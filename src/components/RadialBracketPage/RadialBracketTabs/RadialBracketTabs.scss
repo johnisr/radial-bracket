@@ -4,5 +4,9 @@
   &__text {
     user-select: none;
     font-size: $font-size-quarternary;
+
+    @media only screen and (max-width: 25.75em) { // ~410px
+      font-size: $font-size-body;
+    }
   }
 }
