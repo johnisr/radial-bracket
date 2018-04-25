@@ -15,7 +15,7 @@ class RadialBracketPage extends React.Component {
     dimensions: [600, 700],
     margin: { top: 100, right: 0, bottom: 0, left: 0 },
     showWins: false,
-    showImages: true,
+    showImages: false,
     titleFontFamily: 0,
     nameFontFamily: 0,
     textFontFamily: 0,

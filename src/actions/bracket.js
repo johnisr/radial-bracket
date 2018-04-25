@@ -4,6 +4,7 @@ import database from '../firebase/firebase';
 export const startSubmitNBABracket = async (state = {}) => {
   const {
     showWins = false,
+    showImages= false,
     titleFontFamily =  0,
     nameFontFamily =  0,
     textFontFamily =  0,
@@ -27,6 +28,7 @@ export const startSubmitNBABracket = async (state = {}) => {
     teams,
     bracket,
     showWins,
+    showImages,
     createdAt,
     titleFontFamily,
     nameFontFamily,
@@ -53,6 +55,7 @@ export const startSubmitNBABracket = async (state = {}) => {
 export const startSubmitNHLBracket = async (state = {}) => {
   const {
     showWins = false,
+    showImages = false,
     titleFontFamily =  0,
     nameFontFamily =  0,
     textFontFamily =  0,
@@ -76,6 +79,7 @@ export const startSubmitNHLBracket = async (state = {}) => {
     teams,
     bracket,
     showWins,
+    showImages,
     createdAt,
     titleFontFamily,
     nameFontFamily,
