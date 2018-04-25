@@ -1,7 +1,7 @@
 export default [
   "Roboto",
-  "Open Sans",
-  "Lato",
-  "Montserrat",
-  "Oswald",
+  "Slabo27px",
+  "Baloo",
+  'Satisfy',
+  "Bangers",
 ];

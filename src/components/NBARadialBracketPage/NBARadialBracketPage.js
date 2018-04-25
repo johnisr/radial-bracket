@@ -9,15 +9,16 @@ import fontStyle from '../../data/fontStyle';
 import teamColours from '../../data/nbaColours';
 import teamLogos from '../../data/nbaLogos';
 import { startSubmitNBABracket } from '../../actions/bracket';
+import './NBARadialBracketPage.css';
 
 const NBARadialBracketPage = (props) => {
 
   return (
-    <div className="RadialBracketPage__row">
+    <div className="NBARadialBracketPage__row">
       <section className="section__full-start-end">
         <Header />
       </section>
-      <section className="section__full-start-end">
+      <section className="section__center-start-end">
         <RadialBracketPage
           baseTeams={baseTeams}
           baseBracket={baseBracket}

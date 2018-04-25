@@ -9,13 +9,12 @@ import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 
 // Actions
 import { saveSvgAsPng } from 'save-svg-as-png';
-import './RadialBracketPage.css';
 
 class RadialBracketPage extends React.Component {
   state = {
     dimensions: [600, 700],
     margin: { top: 100, right: 0, bottom: 0, left: 0 },
-    showWins: true,
+    showWins: false,
     showImages: false,
     titleFontFamily: 0,
     nameFontFamily: 0,
@@ -177,6 +176,7 @@ class RadialBracketPage extends React.Component {
   }
   onFontChange = (textType, index) => {
     const fontFamilyChanged = this.state.fontFamilyChanged + 1;
+    console.log(textType, index);
     if (textType === 'Title') {
       this.setState(() => ({ titleFontFamily: index, fontFamilyChanged }))
     } else if (textType === 'Name') {
@@ -206,69 +206,61 @@ class RadialBracketPage extends React.Component {
     const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
     return(
       <div className='RadialBracketPage'>
-        <div className="RadialBracketPage__row">
-          <section className="section__center-start-end">
-            <RadialBracketTabs
-              teamNames={this.props.teamNames}
-              teamColours={this.props.teamColours}
-              fonts={this.props.fonts}
-              fontStyle={this.props.fontStyle}
-              teams={this.state.teams}
-              onActiveTeamChange={this.onActiveTeamChange}
-              activeTeamIndex={this.state.activeTeamIndex}
-              onColorChange={this.onColorChange}
-              onFontChange={this.onFontChange}
-              onFontStyleChange={this.onFontStyleChange}
-              textFontFamily={this.state.textFontFamily}
-              svgBackgroundColor={this.state.svgBackgroundColor}
-              onBackgroundColorChange={this.onBackgroundColorChange}
-            />
-          </section>
-          <section className="section__center-6-start-end">
-            <RadialBracket
-              onClick={this.onSvgClick}
-              fonts={this.props.fonts}
-              fontStyle={this.props.fontStyle}
-              teamColours={this.props.teamColours}
-              teamLogos={this.props.teamLogos}
-              teamNames={this.props.teamNames}
-              teams={this.state.teams}
-              showWins={this.state.showWins}
-              showImages={this.state.showImages}
-              textFontStyle={this.state.textFontStyle}
-              winsFontStyle={this.state.winsFontStyle}
-              textFontFamily={this.state.textFontFamily}
-              winsTextFontFamily={this.state.winsTextFontFamily}
-              dimensions={this.state.dimensions}
-              margin={this.state.margin}
-              bracket={this.state.bracket}
-              titleFontStyle={this.state.titleFontStyle}
-              titleFontFamily={this.state.titleFontFamily}
-              nameFontFamily={this.state.nameFontFamily}
-              name={this.state.name}
-              svgBackgroundColor={this.state.svgBackgroundColor}
-              titleText={this.props.titleText}
-            />
-          </section>
-          <section className="section__center-6-start-end">
-            <RadialBracketInput
-              name={this.state.name}
-              showWins={this.state.showWins}
-              showImages={this.state.showImages}
-              onNameChange={this.onNameChange}
-              onShowWinsClick={this.onShowWinsClick}
-              onShowImagesClick={this.onShowImagesClick}
-              onResetClick={this.onResetClick}
-              isSubmitDisabled={isSubmitDisabled}
-              onSubmit={this.onSubmit}
-            />
-          </section>
-          <RadialBracketModal
-            modal={this.state.modal}
-            onModalClose={this.onModalClose}
-            baseBracket={this.props.baseBracket}
-          />
-        </div>
+        <RadialBracketTabs
+          teamNames={this.props.teamNames}
+          teamColours={this.props.teamColours}
+          fonts={this.props.fonts}
+          fontStyle={this.props.fontStyle}
+          teams={this.state.teams}
+          onActiveTeamChange={this.onActiveTeamChange}
+          activeTeamIndex={this.state.activeTeamIndex}
+          onColorChange={this.onColorChange}
+          onFontChange={this.onFontChange}
+          onFontStyleChange={this.onFontStyleChange}
+          textFontFamily={this.state.textFontFamily}
+          svgBackgroundColor={this.state.svgBackgroundColor}
+          onBackgroundColorChange={this.onBackgroundColorChange}
+        />
+        <RadialBracket
+          onClick={this.onSvgClick}
+          fonts={this.props.fonts}
+          fontStyle={this.props.fontStyle}
+          teamColours={this.props.teamColours}
+          teamLogos={this.props.teamLogos}
+          teamNames={this.props.teamNames}
+          teams={this.state.teams}
+          showWins={this.state.showWins}
+          showImages={this.state.showImages}
+          textFontStyle={this.state.textFontStyle}
+          winsFontStyle={this.state.winsFontStyle}
+          textFontFamily={this.state.textFontFamily}
+          winsTextFontFamily={this.state.winsTextFontFamily}
+          dimensions={this.state.dimensions}
+          margin={this.state.margin}
+          bracket={this.state.bracket}
+          titleFontStyle={this.state.titleFontStyle}
+          titleFontFamily={this.state.titleFontFamily}
+          nameFontFamily={this.state.nameFontFamily}
+          name={this.state.name}
+          svgBackgroundColor={this.state.svgBackgroundColor}
+          titleText={this.props.titleText}
+        />
+        <RadialBracketInput
+          name={this.state.name}
+          showWins={this.state.showWins}
+          showImages={this.state.showImages}
+          onNameChange={this.onNameChange}
+          onShowWinsClick={this.onShowWinsClick}
+          onShowImagesClick={this.onShowImagesClick}
+          onResetClick={this.onResetClick}
+          isSubmitDisabled={isSubmitDisabled}
+          onSubmit={this.onSubmit}
+        />
+        <RadialBracketModal
+          modal={this.state.modal}
+          onModalClose={this.onModalClose}
+          baseBracket={this.props.baseBracket}
+        />
       </div>
     );
   };

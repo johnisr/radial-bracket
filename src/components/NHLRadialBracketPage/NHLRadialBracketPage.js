@@ -9,15 +9,16 @@ import fontStyle from '../../data/fontStyle';
 import teamColours from '../../data/nhlColours';
 import teamLogos from '../../data/nhlLogos';
 import { startSubmitNHLBracket } from '../../actions/bracket';
+import './NHLRadialBracketPage.css';
 
 const NHLRadialBracketPage = (props) => {
 
   return (
-    <div className="RadialBracketPage__row">
+    <div className="NHLRadialBracketPage__row">
       <section className="section__full-start-end">
         <Header />
       </section>
-      <section className="section__full-start-end">
+      <section className="section__center-start-end">
         <RadialBracketPage
           baseTeams={baseTeams}
           baseBracket={baseBracket}
