@@ -28,6 +28,7 @@ const NHLRadialBracketPage = (props) => {
           teamColours={teamColours}
           teamLogos={teamLogos}
           titleText={'NHL 2018 Playoffs'}
+          bracketStateName={'nhl'}
           startSubmitBracket={startSubmitNHLBracket}
         />
       </section>

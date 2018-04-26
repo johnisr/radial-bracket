@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 // Components
 import RadialBracketTabs from './RadialBracketTabs/RadialBracketTabs';
@@ -8,51 +9,47 @@ import RadialBracketInput from './RadialBracketInput/RadialBracketInput';
 import RadialBracketModal from './RadialBracketModal/RadialBracketModal';
 
 // Actions
+import {
+  setBracket,
+  setTeams,
+  setStartTime,
+  setModal,
+  setName,
+  toggleShowWins,
+  toggleShowImages,
+  setHasSubmitted,
+  setActiveTeamIndex,
+  incrementColorChanged,
+  setTitleFontFamily,
+  incrementFontFamilyChanged,
+  setNameFontFamily,
+  setTextFontFamily,
+  setWinsTextFontFamily,
+  setTitleFontStyle,
+  incrementFontStyleChanged,
+  setTextFontStyle,
+  setWinsFontStyle,
+  setSvgBackgroundColor,
+  incrementBackgroundColorChanged,
+} from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
 
 class RadialBracketPage extends React.Component {
-  state = {
-    dimensions: [600, 700],
-    margin: { top: 100, right: 0, bottom: 0, left: 0 },
-    showWins: false,
-    showImages: false,
-    titleFontFamily: 0,
-    nameFontFamily: 0,
-    textFontFamily: 0,
-    winsTextFontFamily: 0,
-    fontFamilyChanged: 0,
-    colorChanged: 0,
-    titleFontStyle: 2,
-    textFontStyle: 0,
-    winsFontStyle: 0,
-    fontStyleChanged: 0,
-    startTime: moment().valueOf(),
-    teams : [],
-    bracket: [],
-    modal: {
-      x: 0,
-      y: 0,
-      name: '',
-      currentIndex: 0,
-      otherIndex: 0,
-    },
-    name: '',
-    activeTeamIndex: 0,
-    hasSubmitted: false,
-    svgBackgroundColor: '',
-    backgroundColorChanged: 0,
-  };
   componentDidMount() {
     // Deep Copy Array using JSON methods
-    const bracket = JSON.parse(JSON.stringify(this.props.baseBracket));
+    if (this.props.bracket.length === 0) {
+      const bracket = JSON.parse(JSON.stringify(this.props.baseBracket));
+      let teams = [];
+      this.props.baseTeams.forEach(temp => {
+        const { full, place, conference, name, ...team } = temp;
+        team.name = 0; 
+        teams.push(team);
+      });
+      this.props.setBracket(bracket);
+      this.props.setTeams(teams);
+      this.props.setStartTime(moment().valueOf());
+    }
     
-    let teams = [];
-    this.props.baseTeams.forEach(temp => {
-      const { full, place, conference, name, ...team } = temp;
-      team.name = 0; 
-      teams.push(team);
-    });
-    this.setState(() => ({ bracket, teams }));
   }
   onSvgClick = (e, d, level) => {
     const currentIndex = Math.pow(2, level) + d.index;
@@ -61,7 +58,7 @@ class RadialBracketPage extends React.Component {
       return;
     }
 
-    const bracket = this.state.bracket;
+    const bracket = this.props.bracket;
     if (bracket[currentIndex].teamIndex === -1) {
       console.log('current team not set');
       return;
@@ -70,7 +67,7 @@ class RadialBracketPage extends React.Component {
     const baseBracket = this.props.baseBracket;
     if(baseBracket[currentIndex].wins === 4) {
       const index = baseBracket[currentIndex].teamIndex;
-      console.log(`${this.state.teams[index].name} has already won`);
+      console.log(`${this.props.teams[index].name} has already won`);
       return;
     }
 
@@ -91,29 +88,28 @@ class RadialBracketPage extends React.Component {
 
     if(baseBracket[otherIndex].wins === 4) {
       const index = baseBracket[otherIndex].teamIndex;
-      console.log(`${this.state.teams[index].name} has already won`);
+      console.log(`${this.props.teams[index].name} has already won`);
       return;
     }
 
     const x = e.clientX;
     const y =  e.clientY;
 
-    const team = this.state.teams[bracket[currentIndex].teamIndex];
+    const team = this.props.teams[bracket[currentIndex].teamIndex];
     const name = this.props.teamNames[team.index][team.name];
 
-    this.setState(() => ({
-      modal: {
-        x,
-        y,
-        name,
-        currentIndex,
-        otherIndex,
-      },
-    }));
+    this.props.setModal({
+      x,
+      y,
+      name,
+      currentIndex,
+      otherIndex,
+    });
+    
   }
   onModalClose = (e, currentIndex, otherIndex) => {
 
-    const bracket = this.state.bracket;
+    const bracket = this.props.bracket;
     if (e !== undefined && currentIndex !== undefined && otherIndex !== undefined) {
       const value = e.target.value;
       bracket[currentIndex].wins = 4;
@@ -125,38 +121,37 @@ class RadialBracketPage extends React.Component {
         bracket[i] = {teamIndex: -1, wins: 0 };
       }
     }
-    this.setState(() => ({
-      modal: {
-        x: 0,
-        y: 0,
-        name: '',
-        currentIndex: 0,
-        otherIndex: 0,
-      },
-      bracket,
-    }));
+
+    this.props.setModal({
+      x: 0,
+      y: 0,
+      name: '',
+      currentIndex: 0,
+      otherIndex: 0,
+    });
+    this.props.setBracket(bracket);
   }
   onNameChange = (e) => {
     const name = e.target.value;
     if (name.length > 20) return;
-    this.setState(() => ({ name }));
+    this.props.setName(name);
   }
   onResetClick = () => {
     const bracket = JSON.parse(JSON.stringify(this.props.baseBracket));
-    this.setState(() => ({ bracket }));
+    this.props.setBracket(bracket);
   };
   onShowWinsClick = () => {
-    this.setState(() => ({ showWins: !this.state.showWins }));
+    this.props.toggleShowWins();
   }
   onShowImagesClick = () => {
-    this.setState(() => ({ showImages: !this.state.showImages }));
+    this.props.toggleShowImages();
   }
   onSubmit = async () => {
-    if (!this.state.hasSubmitted) {
+    if (!this.props.hasSubmitted) {
       try {
-        await this.props.startSubmitBracket(this.state);
-        const hasSubmitted = true;
-        this.setState(() => ({ hasSubmitted }));
+        console.log(this.props.state);
+        await this.props.startSubmitBracket(this.props.state);
+        this.props.setHasSubmitted();
       } catch (e) {
         console.log(e);
       }
@@ -165,45 +160,44 @@ class RadialBracketPage extends React.Component {
   }
   onActiveTeamChange = (e) => {
     const activeTeamIndex = e.target.value;
-    this.setState(() => ({ activeTeamIndex }));
+    this.props.setActiveTeamIndex(activeTeamIndex);
   }
   onColorChange = (colorIndex) => {
-    const colorChanged = this.state.colorChanged + 1;
-    const teams = this.state.teams;
-    const index = this.state.activeTeamIndex;
+    const teams = this.props.teams;
+    const index = this.props.activeTeamIndex;
     teams[index].color = colorIndex;
-    this.setState(() => ({ teams, colorChanged }));
+    this.props.incrementColorChanged();
+    this.props.setTeams(teams);
   }
   onFontChange = (textType, index) => {
-    const fontFamilyChanged = this.state.fontFamilyChanged + 1;
-    console.log(textType, index);
     if (textType === 'Title') {
-      this.setState(() => ({ titleFontFamily: index, fontFamilyChanged }))
+      this.props.setTitleFontFamily(index);
     } else if (textType === 'Name') {
-      this.setState(() => ({ nameFontFamily: index, fontFamilyChanged }))
+      this.props.setNameFontFamily(index);
     } else if (textType === 'Teams') {
-      this.setState(() => ({ textFontFamily: index, fontFamilyChanged }))
+      this.props.setTextFontFamily(index);
     } else if (textType === 'Wins') {
-      this.setState(() => ({ winsTextFontFamily: index, fontFamilyChanged }))
+      this.props.setWinsTextFontFamily(index);
     }
+    this.props.incrementFontFamilyChanged();
   }
   onFontStyleChange = (textType, index) => {
-    const fontStyleChanged = this.state.fontStyleChanged + 1;
     if (textType === 'Title') {
-      this.setState(() => ({ titleFontStyle: index, fontStyleChanged }))
+      this.props.setTitleFontStyle(index);
     } else if (textType === 'Teams') {
-      this.setState(() => ({ textFontStyle: index, fontStyleChanged }))
+      this.props.setTextFontStyle(index);
     } else if (textType === 'Wins') {
-      this.setState(() => ({ winsFontStyle: index, fontStyleChanged }))
+      this.props.setWinsFontStyle(index);
     }
+    this.props.incrementFontStyleChanged();
   }
   onBackgroundColorChange = (e) => {
     const svgBackgroundColor = e.target.value;
-    const backgroundColorChanged = this.state.backgroundColorChanged + 1;
-    this.setState(() => ({ backgroundColorChanged, svgBackgroundColor }));
+    this.props.setSvgBackgroundColor(svgBackgroundColor);
+    this.props.incrementBackgroundColorChanged();
   }
   render() {
-    const isSubmitDisabled = this.state.bracket.length === 0 || this.state.bracket[1].teamIndex === -1;
+    const isSubmitDisabled = this.props.bracket.length === 0 || this.props.bracket[1].teamIndex === -1;
     return(
       <div className='RadialBracketPage'>
         <RadialBracketTabs
@@ -211,15 +205,15 @@ class RadialBracketPage extends React.Component {
           teamColours={this.props.teamColours}
           fonts={this.props.fonts}
           fontStyle={this.props.fontStyle}
-          textFontStyle={this.state.textFontStyle}
-          teams={this.state.teams}
+          textFontStyle={this.props.textFontStyle}
+          teams={this.props.teams}
           onActiveTeamChange={this.onActiveTeamChange}
-          activeTeamIndex={this.state.activeTeamIndex}
+          activeTeamIndex={this.props.activeTeamIndex}
           onColorChange={this.onColorChange}
           onFontChange={this.onFontChange}
           onFontStyleChange={this.onFontStyleChange}
-          textFontFamily={this.state.textFontFamily}
-          svgBackgroundColor={this.state.svgBackgroundColor}
+          textFontFamily={this.props.textFontFamily}
+          svgBackgroundColor={this.props.svgBackgroundColor}
           onBackgroundColorChange={this.onBackgroundColorChange}
         />
         <RadialBracket
@@ -229,27 +223,27 @@ class RadialBracketPage extends React.Component {
           teamColours={this.props.teamColours}
           teamLogos={this.props.teamLogos}
           teamNames={this.props.teamNames}
-          teams={this.state.teams}
-          showWins={this.state.showWins}
-          showImages={this.state.showImages}
-          textFontStyle={this.state.textFontStyle}
-          winsFontStyle={this.state.winsFontStyle}
-          textFontFamily={this.state.textFontFamily}
-          winsTextFontFamily={this.state.winsTextFontFamily}
-          dimensions={this.state.dimensions}
-          margin={this.state.margin}
-          bracket={this.state.bracket}
-          titleFontStyle={this.state.titleFontStyle}
-          titleFontFamily={this.state.titleFontFamily}
-          nameFontFamily={this.state.nameFontFamily}
-          name={this.state.name}
-          svgBackgroundColor={this.state.svgBackgroundColor}
+          teams={this.props.teams}
+          showWins={this.props.showWins}
+          showImages={this.props.showImages}
+          textFontStyle={this.props.textFontStyle}
+          winsFontStyle={this.props.winsFontStyle}
+          textFontFamily={this.props.textFontFamily}
+          winsTextFontFamily={this.props.winsTextFontFamily}
+          dimensions={this.props.dimensions}
+          margin={this.props.margin}
+          bracket={this.props.bracket}
+          titleFontStyle={this.props.titleFontStyle}
+          titleFontFamily={this.props.titleFontFamily}
+          nameFontFamily={this.props.nameFontFamily}
+          name={this.props.name}
+          svgBackgroundColor={this.props.svgBackgroundColor}
           titleText={this.props.titleText}
         />
         <RadialBracketInput
-          name={this.state.name}
-          showWins={this.state.showWins}
-          showImages={this.state.showImages}
+          name={this.props.name}
+          showWins={this.props.showWins}
+          showImages={this.props.showImages}
           onNameChange={this.onNameChange}
           onShowWinsClick={this.onShowWinsClick}
           onShowImagesClick={this.onShowImagesClick}
@@ -258,7 +252,7 @@ class RadialBracketPage extends React.Component {
           onSubmit={this.onSubmit}
         />
         <RadialBracketModal
-          modal={this.state.modal}
+          modal={this.props.modal}
           onModalClose={this.onModalClose}
           baseBracket={this.props.baseBracket}
         />
@@ -267,4 +261,58 @@ class RadialBracketPage extends React.Component {
   };
 }
 
-export default RadialBracketPage;
+const mapStateToProps = (state, props) => {
+  return {
+    dimensions: state[`${props.bracketStateName}Bracket`].dimensions,
+    margin: state[`${props.bracketStateName}Bracket`].margin,
+    state: state[`${props.bracketStateName}Bracket`],
+    bracket: state[`${props.bracketStateName}Bracket`].bracket,
+    teams: state[`${props.bracketStateName}Bracket`].teams,
+    modal: state[`${props.bracketStateName}Bracket`].modal,
+    name: state[`${props.bracketStateName}Bracket`].name,
+    showWins: state[`${props.bracketStateName}Bracket`].showWins,
+    showImages: state[`${props.bracketStateName}Bracket`].showImages,
+    hasSubmitted: state[`${props.bracketStateName}Bracket`].hasSubmitted,
+    activeTeamIndex: state[`${props.bracketStateName}Bracket`].activeTeamIndex,
+    colorChanged: state[`${props.bracketStateName}Bracket`].colorChanged,
+    titleFontFamily: state[`${props.bracketStateName}Bracket`].titleFontFamily,
+    nameFontFamily: state[`${props.bracketStateName}Bracket`].nameFontFamily,
+    textFontFamily: state[`${props.bracketStateName}Bracket`].textFontFamily,
+    winsTextFontFamily: state[`${props.bracketStateName}Bracket`].winsTextFontFamily,
+    fontFamilyChanged: state[`${props.bracketStateName}Bracket`].fontFamilyChanged,
+    titleFontStyle: state[`${props.bracketStateName}Bracket`].titleFontStyle,
+    textFontStyle: state[`${props.bracketStateName}Bracket`].textFontStyle,
+    winsFontStyle: state[`${props.bracketStateName}Bracket`].winsFontStyle,
+    fontStyleChanged: state[`${props.bracketStateName}Bracket`].fontStyleChanged,
+    svgBackgroundColor: state[`${props.bracketStateName}Bracket`].svgBackgroundColor,
+    backgroundColorChanged: state[`${props.bracketStateName}Bracket`].backgroundColorChanged,
+  };
+}; 
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    setBracket: (bracket) => dispatch(setBracket(bracket, props.bracketStateName)),
+    setTeams: (teams) => dispatch(setTeams(teams, props.bracketStateName)),
+    setStartTime: (startTime) => dispatch(setStartTime(startTime, props.bracketStateName)),
+    setModal: (modal) => dispatch(setModal(modal, props.bracketStateName)),
+    setName: (name) => dispatch(setName(name, props.bracketStateName)),
+    toggleShowWins: () => dispatch(toggleShowWins(props.bracketStateName)),
+    toggleShowImages: () => dispatch(toggleShowImages(props.bracketStateName)),
+    setHasSubmitted: () => dispatch(setHasSubmitted(props.bracketStateName)),
+    setActiveTeamIndex: (activeTeamIndex) => dispatch(setActiveTeamIndex(activeTeamIndex, props.bracketStateName)),
+    incrementColorChanged: () => dispatch(incrementColorChanged(props.bracketStateName)),
+    setTitleFontFamily: (titleFontFamily) => dispatch(setTitleFontFamily(titleFontFamily, props.bracketStateName)),
+    setNameFontFamily: (nameFontFamily) => dispatch(setNameFontFamily(nameFontFamily, props.bracketStateName)),
+    setTextFontFamily: (textFontFamily) => dispatch(setTextFontFamily(textFontFamily, props.bracketStateName)),
+    setWinsTextFontFamily: (winsTextFontFamily) => dispatch(setWinsTextFontFamily(winsTextFontFamily, props.bracketStateName)),
+    incrementFontFamilyChanged: () => dispatch(incrementFontFamilyChanged(props.bracketStateName)),
+    setTitleFontStyle: (titleFontStyle) => dispatch(setTitleFontStyle(titleFontStyle, props.bracketStateName)),
+    setTextFontStyle: (textFontStyle) => dispatch(setTextFontStyle(textFontStyle, props.bracketStateName)),
+    setWinsFontStyle: (winsFontStyle) => dispatch(setWinsFontStyle(winsFontStyle, props.bracketStateName)),
+    incrementFontStyleChanged: () => dispatch(incrementFontStyleChanged(props.bracketStateName)),
+    setSvgBackgroundColor: (svgBackgroundColor) => dispatch(setSvgBackgroundColor(svgBackgroundColor, props.bracketStateName)),
+    incrementBackgroundColorChanged: () => dispatch(incrementBackgroundColorChanged(props.bracketStateName)),
+  };
+  
+} 
+export default connect(mapStateToProps, mapDispatchToProps)(RadialBracketPage);

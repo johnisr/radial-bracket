@@ -28,6 +28,7 @@ const NBARadialBracketPage = (props) => {
           teamColours={teamColours}
           teamLogos={teamLogos}
           titleText={'NBA 2018 Playoffs'}
+          bracketStateName={'nba'}
           startSubmitBracket={startSubmitNBABracket}
         />
       </section>
