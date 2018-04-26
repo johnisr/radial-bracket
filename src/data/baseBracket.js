@@ -68,10 +68,10 @@ export default [
 
   // -------------------WEST SEMIFINALS ----------------
 
-  // [UTA, OKC] vs [MIN, HOU], BOTTOM LEFT
+  // HOU vs [UTA, OKC], BOTTOM LEFT
 
   {
-    "teamIndex": -1,
+    "teamIndex": 8,
     "wins": 0
   },
   {
@@ -79,7 +79,7 @@ export default [
     "wins": 0
   },
 
-  // NOP vs [GSW, SAS], TOP LEFT
+  // NOP vs GSW, TOP LEFT
 
   {
     "teamIndex": 13,
@@ -142,7 +142,7 @@ export default [
 
   {
     "teamIndex": 8,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 9,
@@ -153,7 +153,7 @@ export default [
 
   {
     "teamIndex": 10,
-    "wins": 1
+    "wins": 2
   },
   {
     "teamIndex": 11,
