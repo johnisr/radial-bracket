@@ -25,12 +25,11 @@ const RadialBracketColours = (props) => {
     sortedTeamNames.sort((a, b) => {
       if (a.name < b.name) return -1;
       if (b.name < a.name) return 1;
+      return 0;
     });
   }
 
   const fontStyle = props.fontStyle[props.textFontStyle];
-  console.log(props.fontStyle);
-  console.log(props.textFontStyle);
   const font = {
     fontFamily: fonts[props.textFontFamily],
     color: fontStyle.split(' ')[0],
@@ -49,7 +48,7 @@ const RadialBracketColours = (props) => {
         onChange={props.onActiveTeamChange}
         className="RadialBracketColours__select"
       >
-          <option key={'zero'} value={-1}>Select Team to Edit</option>
+          <option key={'zero'} value={-1}>Team</option>
         {
           sortedTeamNames.map((teamObj, i) => (
             <option key={i} value={teamObj.index}>
