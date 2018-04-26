@@ -44,14 +44,14 @@ export default [
 
   // -------------------EAST SEMIFINALS --------------
 
-  // TBL vs [BOS, TOR]
+  // TBL vs BOS
 
   {
     "teamIndex": 0,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 2,
     "wins": 0
   },
 
@@ -107,7 +107,7 @@ export default [
 
   {
     "teamIndex": 2,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 3,

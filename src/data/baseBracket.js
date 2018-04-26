@@ -96,7 +96,7 @@ export default [
 
   {
     "teamIndex": 0,
-    "wins": 2
+    "wins": 3
   },
   {
     "teamIndex": 1,
@@ -107,7 +107,7 @@ export default [
 
   {
     "teamIndex": 2,
-    "wins": 2
+    "wins": 3
   },
   {
     "teamIndex": 3,
