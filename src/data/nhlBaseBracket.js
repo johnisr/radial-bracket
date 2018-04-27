@@ -63,7 +63,7 @@ export default [
   },
   {
     "teamIndex": 6,
-    "wins": 0
+    "wins": 1
   },
 
   // -------------------WEST SEMIFINALS ----------------
@@ -76,7 +76,7 @@ export default [
   },
   {
     "teamIndex": 11,
-    "wins": 0
+    "wins": 1
   },
 
   // WPG vs NSH

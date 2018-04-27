@@ -133,7 +133,7 @@ export default [
   },
   {
     "teamIndex": 7,
-    "wins": 2
+    "wins": 3
   },
 
   // ------------ WEST QUARTERFINALS ----------------------
