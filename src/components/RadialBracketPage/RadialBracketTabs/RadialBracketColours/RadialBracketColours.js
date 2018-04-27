@@ -44,7 +44,7 @@ const RadialBracketColours = (props) => {
   return (
     <div className="RadialBracketColours">
       <select 
-        value={props.activeTeam}
+        value={props.activeTeamIndex}
         onChange={props.onActiveTeamChange}
         className="RadialBracketColours__select"
       >

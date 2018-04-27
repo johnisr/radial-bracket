@@ -7,6 +7,8 @@ const Header = () => (
     <h1 className="header__title">Radial Bracket Maker</h1>
     <NavLink className="header__btn" to='/nba' >nba</NavLink>
     <NavLink className="header__btn" to='/nhl' >nhl</NavLink>
+    <NavLink className="header__btn" to='/nhlAnalysis' >nhl analysis</NavLink>
+    <NavLink className="header__btn" to='/nbaAnalysis' >nba analysis</NavLink>
   </header>
 );
 
