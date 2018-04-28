@@ -31,6 +31,7 @@ import {
   setWinsFontStyle,
   setSvgBackgroundColor,
   incrementBackgroundColorChanged,
+  startSubmitBracket,
 } from '../../actions/bracket';
 import { saveSvgAsPng } from 'save-svg-as-png';
 
@@ -312,6 +313,7 @@ const mapDispatchToProps = (dispatch, props) => {
     incrementFontStyleChanged: () => dispatch(incrementFontStyleChanged(props.bracketStateName)),
     setSvgBackgroundColor: (svgBackgroundColor) => dispatch(setSvgBackgroundColor(svgBackgroundColor, props.bracketStateName)),
     incrementBackgroundColorChanged: () => dispatch(incrementBackgroundColorChanged(props.bracketStateName)),
+    startSubmitBracket: (state) => dispatch(startSubmitBracket(state, props.bracketStateDatabase)),
   };
   
 } 

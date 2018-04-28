@@ -1,14 +1,13 @@
 import React from 'react';
 import Header from '../Header/Header';
 import RadialBracketPage from '../RadialBracketPage/RadialBracketPage';
-import baseTeams from '../../data/baseTeams';
-import baseBracket from '../../data/baseBracket';
+import baseTeams from '../../data/nbaBaseTeams';
+import baseBracket from '../../data/nbaBaseBracket';
 import teamNames from '../../data/nbaNames';
 import fonts from '../../data/fonts';
 import fontStyle from '../../data/fontStyle';
 import teamColours from '../../data/nbaColours';
 import teamLogos from '../../data/nbaLogos';
-import { startSubmitNBABracket } from '../../actions/bracket';
 import './NBARadialBracketPage.css';
 
 const NBARadialBracketPage = (props) => {
@@ -29,7 +28,7 @@ const NBARadialBracketPage = (props) => {
           teamLogos={teamLogos}
           titleText={'NBA 2018 Playoffs'}
           bracketStateName={'nba'}
-          startSubmitBracket={startSubmitNBABracket}
+          bracketStateDatabase={'nba'}
         />
       </section>
     </div>

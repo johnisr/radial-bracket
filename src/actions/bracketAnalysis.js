@@ -14,7 +14,6 @@ export const startSetBracketData = (bracketStateFor) => {
       snapshot.forEach((datum) => {
         data.push(datum.val());
       });
-      console.log(data);
       dispatch(setBracketData(data, bracketStateFor));
     } catch (e) {
       console.log(e);

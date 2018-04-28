@@ -52,7 +52,7 @@ export default [
   },
   {
     "teamIndex": 2,
-    "wins": 0
+    "wins": 1
   },
 
   // WSH vs PIT

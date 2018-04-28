@@ -8,7 +8,6 @@ import fonts from '../../data/fonts';
 import fontStyle from '../../data/fontStyle';
 import teamColours from '../../data/nhlColours';
 import teamLogos from '../../data/nhlLogos';
-import { startSubmitNHLBracket } from '../../actions/bracket';
 import './NHLRadialBracketPage.css';
 
 const NHLRadialBracketPage = (props) => {
@@ -29,7 +28,7 @@ const NHLRadialBracketPage = (props) => {
           teamLogos={teamLogos}
           titleText={'NHL 2018 Playoffs'}
           bracketStateName={'nhl'}
-          startSubmitBracket={startSubmitNHLBracket}
+          bracketStateDatabase={'nhl'}
         />
       </section>
     </div>

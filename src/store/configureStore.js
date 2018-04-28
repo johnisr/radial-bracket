@@ -13,6 +13,7 @@ export default () => {
      nhlBracket: createBracketFor('nhl'),
      nbaBracketData: createBracketAnalysisFor('nba'),
      nhlBracketData: createBracketAnalysisFor('nhl'),
+     newBracket: createBracketFor('new'),
    }),
    composeEnhancers(applyMiddleware(thunk))
  );

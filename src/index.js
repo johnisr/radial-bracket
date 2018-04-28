@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 // import RadialBracketCharts from './playground/RadialBracketCharts';
 // import RadialBracketRedux from './playground/RadialBracketRedux';
 // import CalculateTimeAndDuration from './playground/CalculateTimeAndDuration';
+// import RadialBracketPageMaker from './playground/RadialBracketPageMaker';
 
 import configureStore from './store/configureStore';
 
@@ -24,6 +25,12 @@ const jsx = (
     <App />
   </Provider>
 );
+
+// const jsx2 = (
+//   <Provider store={store}>
+//     <RadialBracketPageMaker />
+//   </Provider>
+// )
 
 ReactDOM.render(jsx, document.getElementById('root'));
 registerServiceWorker();

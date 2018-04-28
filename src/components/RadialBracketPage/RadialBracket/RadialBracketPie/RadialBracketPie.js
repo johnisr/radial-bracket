@@ -1,5 +1,6 @@
 import React from 'react';
 import { arc, pie } from 'd3-shape';
+import { schemeCategory10  } from 'd3-scale-chromatic';
 import './RadialBracketPie.css';
 
 const RadialBracketPie = (props) => {
@@ -69,6 +70,10 @@ const RadialBracketPie = (props) => {
         return i % 2 === 0 ? '#999999' : '#B2B2B2';
       }
       const team = teams[d.data.teamIndex];
+      const color = teamColours[team.index][team.color].color;
+      if (color === '') {
+        return schemeCategory10[i % 10];
+      }
       return teamColours[team.index][team.color].color;
   }
 
