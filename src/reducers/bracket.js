@@ -11,7 +11,7 @@ const defaultBracketState = {
   "showWins" : false,
   "showImages": false,
   "startTime" : 0,
-  "svgBackgroundColor" : "",
+  "svgBackgroundColor" : "#FFFFFF",
   "teams" : [],
   "textFontFamily" : 0,
   "textFontStyle" : 0,

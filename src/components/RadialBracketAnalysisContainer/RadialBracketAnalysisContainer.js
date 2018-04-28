@@ -126,10 +126,10 @@ class RadialBracketAnalysis extends React.Component {
     if (currentIndex > 16) {
       return;
     }
-    if (this.props.baseBracket[currentIndex * 2].wins === 4 || this.props.baseBracket[currentIndex * 2 + 1].wins === 4) {
-      console.log('This was already decided before you used the app');
-      return;
-    }
+    // if (this.props.baseBracket[currentIndex * 2].wins === 4 || this.props.baseBracket[currentIndex * 2 + 1].wins === 4) {
+    //   console.log('This was already decided before you used the app');
+    //   return;
+    // }
     this.setState(() => ({ activeRound: currentIndex }));
   }
 
@@ -175,7 +175,7 @@ class RadialBracketAnalysis extends React.Component {
         <div style={{ textAlign: 'center' }}>
           {
             this.state.activeRound !== -1 &&
-            <VictoryChart domainPadding={{ x: 100 }}
+            <VictoryChart domainPadding={{ x: 60 }}
               domain={{ y: [0, 100] }}
             >
               <VictoryLabel text={this.props.roundNames[this.state.activeRound]} x={225} y={30} textAnchor="middle"/>
@@ -190,7 +190,7 @@ class RadialBracketAnalysis extends React.Component {
                 data={this.state.predictionsWithoutWins[this.state.activeRound]}
                 alignment="middle"
                 animate={{
-                  duration: 500,
+                  duration: 250,
                 }}
                 barRatio={0.8}
                 x="name"

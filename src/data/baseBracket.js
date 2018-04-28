@@ -5,7 +5,7 @@ export default [
     "teamIndex": -1,
     "wins": 0
   },
-  //Champiun
+  //Champion
   { 
     "teamIndex": -1,
     "wins": 0
@@ -44,10 +44,10 @@ export default [
 
   // -------------------EAST SEMIFINALS --------------
 
-  // [TOR, WAS] vs [CLE, IND]
+  // TOR vs [CLE, IND]
 
   {
-    "teamIndex": -1,
+    "teamIndex": 0,
     "wins": 0
   },
   {
@@ -55,7 +55,7 @@ export default [
     "wins": 0
   },
 
-  // [MIL, BOS] vs [MIA, PHI]
+  // [MIL, BOS] vs PHI
 
   {
     "teamIndex": 4,
@@ -96,7 +96,7 @@ export default [
 
   {
     "teamIndex": 0,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 1,
@@ -111,7 +111,7 @@ export default [
   },
   {
     "teamIndex": 3,
-    "wins": 2
+    "wins": 3
   },
 
   // PHI vs MIA
