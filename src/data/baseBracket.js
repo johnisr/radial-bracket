@@ -68,14 +68,14 @@ export default [
 
   // -------------------WEST SEMIFINALS ----------------
 
-  // HOU vs [UTA, OKC], BOTTOM LEFT
+  // HOU vs UTA, BOTTOM LEFT
 
   {
     "teamIndex": 8,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 11,
     "wins": 0
   },
 
@@ -157,7 +157,7 @@ export default [
   },
   {
     "teamIndex": 11,
-    "wins": 3
+    "wins": 4
   },
 
   // POR vs NOP

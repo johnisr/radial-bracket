@@ -4,6 +4,7 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 
 import RadialBracket from '../RadialBracketPage/RadialBracket/RadialBracket';
 import { startSetBracketData } from '../../actions/bracketAnalysis';
+import './RadialBracketAnalysisContainer.css';
 
 class RadialBracketAnalysis extends React.Component {
   state = {
@@ -23,23 +24,23 @@ class RadialBracketAnalysis extends React.Component {
     const baseBracket = this.props.baseBracket;
     const bracket = this.props.bracket;
 
+    if (JSON.parse(JSON.stringify(bracket)) === JSON.parse(JSON.stringify(baseBracket))) {
+      console.log('wow');
+    }
+
     const teamNames = this.props.teamNames;
     const teamColours = this.props.teamColours;
 
     // Fetch data if it hasn't been fetched already
     if (this.props.data.length === 0) {
       try {
-      await this.props.startSetBracketData();
+        await this.props.startSetBracketData();   
       } catch (e) {
         console.log(e);
       }
     }
-    
-    // loop through data and and put it in state
-    const data =[];
-    Object.keys(this.props.data).forEach((key) => {
-      data.push(this.props.data[key]);
-    });
+
+    const data = this.props.data;
 
     // Calculate aggregate results for entire data
     const bracketWithoutWins = [{ team: 0}];
@@ -85,7 +86,6 @@ class RadialBracketAnalysis extends React.Component {
       }
       const team = teams[bracket[i].teamIndex];
       const predicted = teamNames[team.index][team.name];
-      console.log(predicted);
       const predictedNum = bracketWithoutWins[i][predicted] === undefined ? 0 : bracketWithoutWins[i][predicted].count;
       
       // have to check base bracket to see if already done then put bracket -1
@@ -137,53 +137,54 @@ class RadialBracketAnalysis extends React.Component {
     if (this.props.teams.length === 0) {
       return (
         <div>
-          Need to make prediction first
+          <p className="RadialBracketAnalysisContainer__text" >Make some predictions first before visiting</p>
         </div>
       )
     };
 
     return (
-      <div>
-        <RadialBracket
-          onClick={this.onClick}
-          teamColours={this.state.percentageColours}
-          teamNames={this.state.percentageNames}
-          teams={this.state.percentageTeams}
-          bracket={this.state.percentageBracket}
-          name={'% Agreed with your picks'}
-          titleText={'Click to find out details'}
-          
-          
-          textFontStyle={0}
-          winsFontStyle={0}
-          titleFontStyle={2}
-          textFontFamily={0}
-          winsTextFontFamily={0}
-          titleFontFamily={0}
-          nameFontFamily={0}
-          
-          
-          svgBackgroundColor={''}
-          dimensions={[600, 700]}
-          margin={{ top: 100, right: 0, bottom: 0, left: 0 }}
-          fonts={this.props.fonts}
-          fontStyle={this.props.fontStyle}
-          teamLogos={[]}
-          showWins={false}
-          showImages={false}
-        />
-        <div style={{ textAlign: 'center' }}>
+      <div className="RadialBracketAnalysisContainer">
+        <section className="section__center-start-end">
+          <RadialBracket
+            onClick={this.onClick}
+            teamColours={this.state.percentageColours}
+            teamNames={this.state.percentageNames}
+            teams={this.state.percentageTeams}
+            bracket={this.state.percentageBracket}
+            name={'% Agreed with your picks'}
+            titleText={'Click to find out details'}
+            
+            textFontStyle={0}
+            winsFontStyle={0}
+            titleFontStyle={2}
+            textFontFamily={0}
+            winsTextFontFamily={0}
+            titleFontFamily={0}
+            nameFontFamily={0}
+            
+            svgBackgroundColor={''}
+            dimensions={[600, 700]}
+            margin={{ top: 100, right: 0, bottom: 0, left: 0 }}
+            fonts={this.props.fonts}
+            fontStyle={this.props.fontStyle}
+            teamLogos={[]}
+            showWins={false}
+            showImages={false}
+          />
           {
             this.state.activeRound !== -1 &&
             <VictoryChart domainPadding={{ x: 60 }}
               domain={{ y: [0, 100] }}
             >
-              <VictoryLabel text={this.props.roundNames[this.state.activeRound]} x={225} y={30} textAnchor="middle"/>
-              <VictoryAxis
+              <VictoryLabel
+                text={this.props.roundNames[this.state.activeRound]}
+                x={225}
+                y={30}
+                textAnchor="middle"
               />
+              <VictoryAxis/>
               <VictoryAxis
                 dependentAxis
-                // tickFormat specifies how ticks should be displayed
                 tickFormat={(x) => (`${x}%`)}
               />
               <VictoryBar
@@ -199,7 +200,7 @@ class RadialBracketAnalysis extends React.Component {
               />
             </VictoryChart>
           }
-        </div>
+        </section>
       </div>
     );
   }

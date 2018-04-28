@@ -1,0 +1,9 @@
+@import '../../styles/base';
+
+.RadialBracketAnalysisContainer {
+  &__text {
+    text-align: center;
+    margin: 2rem;
+    font-size: $font-size-secondary;
+  }
+}
