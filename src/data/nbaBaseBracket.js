@@ -55,14 +55,14 @@ export default [
     "wins": 0
   },
 
-  // [MIL, BOS] vs PHI
+  //  PHI vs BOS
 
   {
     "teamIndex": 4,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 6,
     "wins": 0
   },
 
@@ -87,7 +87,7 @@ export default [
   },
   {
     "teamIndex": 14,
-    "wins": 0
+    "wins": 1
   },
 
   // ------------------EAST QUARTERFINALS ----------------
@@ -129,7 +129,7 @@ export default [
 
   {
     "teamIndex": 6,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 7,

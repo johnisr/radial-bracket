@@ -72,7 +72,7 @@ export default [
 
   {
     "teamIndex": 8,
-    "wins": 0
+    "wins": 1
   },
   {
     "teamIndex": 11,
