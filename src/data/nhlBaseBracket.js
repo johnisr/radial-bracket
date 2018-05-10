@@ -23,18 +23,18 @@ export default [
   // --------------------EAST FINALS ----------
 
   {
-    "teamIndex": -1,
+    "teamIndex": 0,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 4,
     "wins": 0
   },
 
   // --------------------WEST FINALS ---------------
 
   {
-    "teamIndex": -1,
+    "teamIndex": 11,
     "wins": 0
   },
   {
@@ -48,7 +48,7 @@ export default [
 
   {
     "teamIndex": 0,
-    "wins": 0
+    "wins": 4
   },
   {
     "teamIndex": 2,
@@ -59,11 +59,11 @@ export default [
 
   {
     "teamIndex": 4,
-    "wins": 0
+    "wins": 4
   },
   {
     "teamIndex": 6,
-    "wins": 1
+    "wins": 2
   },
 
   // -------------------WEST SEMIFINALS ----------------
@@ -72,22 +72,22 @@ export default [
 
   {
     "teamIndex": 8,
-    "wins": 1
+    "wins": 2
   },
   {
     "teamIndex": 11,
-    "wins": 1
+    "wins": 4
   },
 
   // WPG vs NSH
 
   {
     "teamIndex": 13,
-    "wins": 1
+    "wins": 3
   },
   {
     "teamIndex": 15,
-    "wins": 0
+    "wins": 3
   },
 
   // ------------------EAST QUARTERFINALS ----------------

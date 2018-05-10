@@ -24,10 +24,6 @@ class RadialBracketAnalysis extends React.Component {
     const baseBracket = this.props.baseBracket;
     const bracket = this.props.bracket;
 
-    if (JSON.parse(JSON.stringify(bracket)) === JSON.parse(JSON.stringify(baseBracket))) {
-      console.log('wow');
-    }
-
     const teamNames = this.props.teamNames;
     const teamColours = this.props.teamColours;
 

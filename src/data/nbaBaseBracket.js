@@ -23,47 +23,47 @@ export default [
   // --------------------EAST FINALS ----------
 
   {
-    "teamIndex": -1,
+    "teamIndex": 2,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 6,
     "wins": 0
   },
 
   // --------------------WEST FINALS ---------------
 
   {
-    "teamIndex": -1,
+    "teamIndex": 8,
     "wins": 0
   },
   {
-    "teamIndex": -1,
+    "teamIndex": 14,
     "wins": 0
   },
 
   // -------------------EAST SEMIFINALS --------------
 
-  // TOR vs [CLE, IND]
+  // TOR vs CLE
 
   {
     "teamIndex": 0,
     "wins": 0
   },
   {
-    "teamIndex": -1,
-    "wins": 0
+    "teamIndex": 2,
+    "wins": 4
   },
 
   //  PHI vs BOS
 
   {
     "teamIndex": 4,
-    "wins": 0
+    "wins": 1
   },
   {
     "teamIndex": 6,
-    "wins": 0
+    "wins": 4
   },
 
   // -------------------WEST SEMIFINALS ----------------
@@ -72,22 +72,22 @@ export default [
 
   {
     "teamIndex": 8,
-    "wins": 0
+    "wins": 4
   },
   {
     "teamIndex": 11,
-    "wins": 0
+    "wins": 1
   },
 
   // NOP vs GSW, TOP LEFT
 
   {
     "teamIndex": 13,
-    "wins": 0
+    "wins": 1
   },
   {
     "teamIndex": 14,
-    "wins": 1
+    "wins": 4
   },
 
   // ------------------EAST QUARTERFINALS ----------------
@@ -107,7 +107,7 @@ export default [
 
   {
     "teamIndex": 2,
-    "wins": 3
+    "wins": 4
   },
   {
     "teamIndex": 3,
